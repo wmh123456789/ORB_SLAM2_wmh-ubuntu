@@ -28,7 +28,10 @@ endif()
 
 LIST(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake_modules)
 
-find_package(OpenCV 3.0 QUIET)
+find_package(Qt5Core)
+find_package(Qt5Widgets)
+
+find_package(OpenCV 3.0 QUIET NO_DEFAULT_PATH PATHS "/usr/local/opencv330")
 if(NOT OpenCV_FOUND)
    find_package(OpenCV 2.4.3 QUIET)
    if(NOT OpenCV_FOUND)
@@ -39,10 +42,12 @@ endif()
 find_package(Eigen3 3.1.0 REQUIRED)
 find_package(Pangolin REQUIRED)
 
+
+
 include_directories(
 ${PROJECT_SOURCE_DIR}
 ${PROJECT_SOURCE_DIR}/include
-${EIGEN3_INCLUDE_DIR}
+${EIGEN3_INCLUDE_DIR}q
 ${Pangolin_INCLUDE_DIRS}
 )
 

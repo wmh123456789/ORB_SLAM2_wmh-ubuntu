@@ -239,6 +239,13 @@ cv::Mat Tracking::GrabImageMonocular(const cv::Mat &im, const double &timestamp)
 {
     mImGray = im;
 
+    //   For Debug
+    stringstream sst;
+    sst << timestamp; 
+    // cout<< "TIME(@tracking): "<<setprecision(10.4)<< timestamp << endl;
+    //-- For Debug
+
+
     if(mImGray.channels()==3)
     {
         if(mbRGB)

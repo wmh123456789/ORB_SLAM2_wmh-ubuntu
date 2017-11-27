@@ -25,29 +25,33 @@
 #include<chrono>
 
 #include<opencv2/core/core.hpp>
-
+// #include<stdlib.h>
 #include<System.h>
 
 using namespace std;
 
 void LoadImages(const string &strFile, vector<string> &vstrImageFilenames,
                 vector<double> &vTimestamps);
+double LoadTimestamp(const string &strFile);
 
 int main(int argc, char **argv)
 {
     if(argc != 4)
     {
-        cerr << endl << "Usage: ./mono_tum path_to_vocabulary path_to_settings path_to_sequence" << endl;
+        cerr << endl << "Usage: ./mono_wmh path_to_vocabulary path_to_settings path_to_sequence" << endl;
         return 1;
     }
 
     // Retrieve paths to images
-    vector<string> vstrImageFilenames;
+    // vector<string> vstrImageFilenames;
     vector<double> vTimestamps;
-    string strFile = string(argv[3])+"/rgb.txt";
-    LoadImages(strFile, vstrImageFilenames, vTimestamps);
+    // string strFile = string(argv[3])+"/rgb.txt";
+    // LoadImages(strFile, vstrImageFilenames, vTimestamps);
 
-    int nImages = vstrImageFilenames.size();
+    // int nImages = vstrImageFilenames.size();
+
+    int nImages = 10000; // Define a buffer length
+
 
     // Create SLAM system. It initializes all system threads and gets ready to process frames.
     ORB_SLAM2::System SLAM(argv[1],argv[2],ORB_SLAM2::System::MONOCULAR,true);
@@ -58,20 +62,35 @@ int main(int argc, char **argv)
 
     cout << endl << "-------" << endl;
     cout << "Start processing sequence ..." << endl;
-    cout << "Images in the sequence: " << nImages << endl << endl;
+    // cout << "Images in the sequence: " << nImages << endl << endl;
 
     // Main loop
     cv::Mat im;
-    for(int ni=0; ni<nImages; ni++)
+
+    // for(int ni=0; ni<nImages; ni++)
+    int ni = 1;
+ 
+    while(ni>0 && ni < nImages+1)
     {
         // Read image from file
-        im = cv::imread(string(argv[3])+"/"+vstrImageFilenames[ni],CV_LOAD_IMAGE_UNCHANGED);
-        double tframe = vTimestamps[ni];
+        // im = cv::imread(string(argv[3])+"/"+vstrImageFilenames[ni],CV_LOAD_IMAGE_UNCHANGED);
+        stringstream ni_ss;  // TODO need to optimize
+        string ni_s;
+        ni_ss << ni;
+        ni_ss >> ni_s;
+        im = cv::imread(string(argv[3])+"/"+ni_s+".jpg",CV_LOAD_IMAGE_UNCHANGED); // Read image from file buffer.  By wmh
+        cout << "Image: "<< ni_s << ".jpg is loaded.  " << endl;
+
+        // double tframe = vTimestamps[ni];
+        double tframe = LoadTimestamp(string(argv[3])+"/"+ ni_s + ".txt");
+        // cout << "@Timestamp: " << tframe << endl;
+        
+        vTimestamps.push_back(tframe);
 
         if(im.empty())
         {
             cerr << endl << "Failed to load image at: "
-                 << string(argv[3]) << "/" << vstrImageFilenames[ni] << endl;
+                 << string(argv[3]) << "/" << ni_s +".jpg"<< endl;
             return 1;
         }
 
@@ -95,14 +114,17 @@ int main(int argc, char **argv)
         vTimesTrack[ni]=ttrack;
 
         // Wait to load the next frame
-        double T=0;
-        if(ni<nImages-1)
-            T = vTimestamps[ni+1]-tframe;
-        else if(ni>0)
-            T = tframe-vTimestamps[ni-1];
+        // double T=0;
+        // if(ni<nImages-1)
+        //     T = vTimestamps[ni+1]-tframe;
+        // else if(ni>0)
+        //     T = tframe-vTimestamps[ni-1];
 
+        double T = 0.2;
         if(ttrack<T)
             usleep((T-ttrack)*1e6);
+
+        ni++;
     }
 
     // Stop all threads
@@ -123,6 +145,22 @@ int main(int argc, char **argv)
     SLAM.SaveKeyFrameTrajectoryTUM("KeyFrameTrajectory.txt");
 
     return 0;
+}
+
+double LoadTimestamp(const string &strFile)
+{
+    ifstream f;
+    string s;
+    stringstream ss;
+    double atimestamp;
+    f.open(strFile.c_str());
+    getline(f,s);
+    ss << s;
+    ss >> atimestamp;
+    f.close();
+    // cout << "@TIme of:"<< strFile << " is "<< atimestamp << endl;
+    return atimestamp;
+
 }
 
 void LoadImages(const string &strFile, vector<string> &vstrImageFilenames, vector<double> &vTimestamps)

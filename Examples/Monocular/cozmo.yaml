@@ -17,7 +17,11 @@ Camera.p2:  0.00914632
 Camera.k3:  0.49639301
 
 # Camera frames per second 
+<<<<<<< HEAD
 Camera.fps: 5.0
+=======
+Camera.fps: 10.0
+>>>>>>> 32543d98ceeb7332f9216772ac4863ffbf15086b
 
 # Color order of the images (0: BGR, 1: RGB. It is ignored if images are grayscale)
 Camera.RGB: 1
@@ -33,14 +37,23 @@ ORBextractor.nFeatures: 1000
 ORBextractor.scaleFactor: 1.2
 
 # ORB Extractor: Number of levels in the scale pyramid	
+<<<<<<< HEAD
 ORBextractor.nLevels: 4
+=======
+ORBextractor.nLevels: 5
+>>>>>>> 32543d98ceeb7332f9216772ac4863ffbf15086b
 
 # ORB Extractor: Fast threshold
 # Image is divided in a grid. At each cell FAST are extracted imposing a minimum response.
 # Firstly we impose iniThFAST. If no corners are detected we impose a lower value minThFAST
 # You can lower these values if your images have low contrast			
+<<<<<<< HEAD
 ORBextractor.iniThFAST: 13
 ORBextractor.minThFAST: 7
+=======
+ORBextractor.iniThFAST: 15
+ORBextractor.minThFAST: 6
+>>>>>>> 32543d98ceeb7332f9216772ac4863ffbf15086b
 
 #--------------------------------------------------------------------------------------------
 # Viewer Parameters

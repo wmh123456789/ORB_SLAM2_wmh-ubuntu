@@ -67,7 +67,7 @@ int main(int argc, char **argv)
         // Read image from file
         im = cv::imread(string(argv[3])+"/"+vstrImageFilenames[ni],CV_LOAD_IMAGE_UNCHANGED);
         double tframe = vTimestamps[ni];
-        cout << "@time: "<< tframe << endl;
+        // cout << "@time: "<< tframe << endl;
 
         if(im.empty())
         {

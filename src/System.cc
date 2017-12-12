@@ -471,6 +471,21 @@ void System::SaveTrajectoryKITTI(const string &filename)
     cout << endl << "trajectory saved!" << endl;
 }
 
+
+void System::SaveMapInfo(const string &filename)
+{
+    cout << "Saving map info for wmh, to " << filename << " ..." << endl;
+
+    // Get the data to print.
+    vector<KeyFrame*> vpKFs = mpMap->GetAllKeyFrames();
+    vector<MapPoint*> vpMPs = mpMap->GetAllMapPoints();
+    cout << "Got " << vpKFs.size() << " Key Frames;";
+    cout << " and " << vpMPs.size() << " Map Points." << endl;
+    
+    // Write file
+
+}
+
 int System::GetTrackingState()
 {
     unique_lock<mutex> lock(mMutexState);

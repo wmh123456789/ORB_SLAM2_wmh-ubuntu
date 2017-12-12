@@ -125,6 +125,8 @@ int main(int argc, char **argv)
         if(ttrack<T)
             usleep((T-ttrack)*1e6);
 
+        // Save save results for coodinate study.  by wmh
+        SLAM.SaveMapInfo("MapInfo-wmh.txt");
         ni++;
     }
 

@@ -4,6 +4,7 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+        
         {
             "name": "SLAM_mono_tum",
             "type": "cppdbg",
@@ -33,7 +34,6 @@
         "args": ["/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Vocabulary/ORBvoc.txt",
             "/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Monocular/cozmo.yaml",
             "/media/wmh/TEMP/SlamTestSeq/MySeq/OnDesk3"],
-            // "/home/wmh/work/seqbuff"],
         "stopAtEntry": false,
         "cwd": "${workspaceFolder}",
         "environment": [],

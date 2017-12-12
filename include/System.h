@@ -118,7 +118,8 @@ public:
     // LoadMap(const string &filename);
 
     // For Map ralated research.  by wmh
-    void SaveMapInfo(const string &filename);
+    void SaveKeyFrameInfo(const string &filename);
+    void SaveMapPointInfo(const string &filename);
 
     // Information from most recent processed frame
     // You can call this right after TrackMonocular (or stereo or RGBD)

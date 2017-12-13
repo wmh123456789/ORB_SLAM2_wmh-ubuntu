@@ -543,27 +543,28 @@ void System::SaveMapPointInfo(const string &filename)
 
     // -- Write info of MapPoint
     // Head line of a CSV file
-    f << "mnID,";
-    f <<"nmFrameID,";
-    f <<"TimeStamp,";
-    f <<"mnGridCols,";
-    f <<"mnGridRows,";
-    f <<"KeyPoints,";
-    f <<"PoseX,";
-    f <<"PoseY,";
-    f <<"PoseZ"<< endl;
+    // f << "mnID,";
+    // f <<"nmFrameID,";
+    // f <<"TimeStamp,";
+    // f <<"mnGridCols,";
+    // f <<"mnGridRows,";
+    // f <<"KeyPoints,";
+    // f <<"PoseX,";
+    // f <<"PoseY,";
+    // f <<"PoseZ"<< endl;
 
+    // TODO: Add output field according to MapPoint.h and .cc
     // Loop over map points
     for (size_t i=0; i < vpKFs.size(); i++)
     {
         // For CSV Format output
         cv::Mat T = vpMPs[i]->GetWorldPos()
-        f << vpKFs[i]->mnId << ",";
-        f << vpKFs[i]->mnFrameId << ",";
-        f << vpKFs[i]->mTimeStamp << ",";
-        f << vpKFs[i]->mnGridCols << ",";
-        f << vpKFs[i]->mnGridRows << ",";
-        f << vpKFs[i]->N << ",";
+        // f << vpKFs[i]->mnId << ",";
+        // f << vpKFs[i]->mnFrameId << ",";
+        // f << vpKFs[i]->mTimeStamp << ",";
+        // f << vpKFs[i]->mnGridCols << ",";
+        // f << vpKFs[i]->mnGridRows << ",";
+        // f << vpKFs[i]->N << ",";
         f << T.at<float>(0,3) << ",";
         f << T.at<float>(1,3) << ",";
         f << T.at<float>(2,3) << endl;

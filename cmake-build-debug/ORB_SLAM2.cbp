@@ -1,0 +1,666 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="ORB_SLAM2"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\usr\;CMake Files\..\..\..\..\usr\lib\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Core\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Widgets\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Gui\;CMake Files\..\..\..\..\usr\local\;CMake Files\..\..\..\..\usr\local\share\;CMake Files\..\..\..\..\usr\local\share\OpenCV\;CMake Files\..\..\..\..\usr\local\lib\;CMake Files\..\..\..\..\usr\local\lib\cmake\;CMake Files\..\..\..\..\usr\local\lib\cmake\Pangolin\;CMake Files\cmake_modules\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="mono_euroc">
+				<Option output="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Monocular/mono_euroc" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Monocular"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DCOMPILEDWITHC11"/>
+					<Add directory="/home/wmh/work/ORB_SLAM2_wmh-ubuntu"/>
+					<Add directory="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/include"/>
+					<Add directory="/usr/include/eigen3q"/>
+					<Add directory="/usr/local/lib/cmake/Pangolin/../../../include"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/local/include/opencv"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 mono_euroc"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="mono_euroc/fast">
+				<Option output="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Monocular/mono_euroc" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Monocular"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DCOMPILEDWITHC11"/>
+					<Add directory="/home/wmh/work/ORB_SLAM2_wmh-ubuntu"/>
+					<Add directory="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/include"/>
+					<Add directory="/usr/include/eigen3q"/>
+					<Add directory="/usr/local/lib/cmake/Pangolin/../../../include"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/local/include/opencv"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 mono_euroc/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="mono_wmh">
+				<Option output="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Monocular/mono_wmh" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Monocular"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DCOMPILEDWITHC11"/>
+					<Add directory="/home/wmh/work/ORB_SLAM2_wmh-ubuntu"/>
+					<Add directory="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/include"/>
+					<Add directory="/usr/include/eigen3q"/>
+					<Add directory="/usr/local/lib/cmake/Pangolin/../../../include"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/local/include/opencv"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 mono_wmh"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="mono_wmh/fast">
+				<Option output="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Monocular/mono_wmh" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Monocular"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DCOMPILEDWITHC11"/>
+					<Add directory="/home/wmh/work/ORB_SLAM2_wmh-ubuntu"/>
+					<Add directory="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/include"/>
+					<Add directory="/usr/include/eigen3q"/>
+					<Add directory="/usr/local/lib/cmake/Pangolin/../../../include"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/local/include/opencv"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 mono_wmh/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="mono_kitti">
+				<Option output="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Monocular/mono_kitti" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Monocular"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DCOMPILEDWITHC11"/>
+					<Add directory="/home/wmh/work/ORB_SLAM2_wmh-ubuntu"/>
+					<Add directory="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/include"/>
+					<Add directory="/usr/include/eigen3q"/>
+					<Add directory="/usr/local/lib/cmake/Pangolin/../../../include"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/local/include/opencv"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 mono_kitti"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="mono_kitti/fast">
+				<Option output="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Monocular/mono_kitti" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Monocular"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DCOMPILEDWITHC11"/>
+					<Add directory="/home/wmh/work/ORB_SLAM2_wmh-ubuntu"/>
+					<Add directory="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/include"/>
+					<Add directory="/usr/include/eigen3q"/>
+					<Add directory="/usr/local/lib/cmake/Pangolin/../../../include"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/local/include/opencv"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 mono_kitti/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="mono_tum">
+				<Option output="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Monocular/mono_tum" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Monocular"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DCOMPILEDWITHC11"/>
+					<Add directory="/home/wmh/work/ORB_SLAM2_wmh-ubuntu"/>
+					<Add directory="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/include"/>
+					<Add directory="/usr/include/eigen3q"/>
+					<Add directory="/usr/local/lib/cmake/Pangolin/../../../include"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/local/include/opencv"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 mono_tum"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="mono_tum/fast">
+				<Option output="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Monocular/mono_tum" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Monocular"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DCOMPILEDWITHC11"/>
+					<Add directory="/home/wmh/work/ORB_SLAM2_wmh-ubuntu"/>
+					<Add directory="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/include"/>
+					<Add directory="/usr/include/eigen3q"/>
+					<Add directory="/usr/local/lib/cmake/Pangolin/../../../include"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/local/include/opencv"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 mono_tum/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="stereo_euroc">
+				<Option output="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Stereo/stereo_euroc" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Monocular"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DCOMPILEDWITHC11"/>
+					<Add directory="/home/wmh/work/ORB_SLAM2_wmh-ubuntu"/>
+					<Add directory="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/include"/>
+					<Add directory="/usr/include/eigen3q"/>
+					<Add directory="/usr/local/lib/cmake/Pangolin/../../../include"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/local/include/opencv"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 stereo_euroc"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="stereo_euroc/fast">
+				<Option output="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Stereo/stereo_euroc" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Monocular"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DCOMPILEDWITHC11"/>
+					<Add directory="/home/wmh/work/ORB_SLAM2_wmh-ubuntu"/>
+					<Add directory="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/include"/>
+					<Add directory="/usr/include/eigen3q"/>
+					<Add directory="/usr/local/lib/cmake/Pangolin/../../../include"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/local/include/opencv"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 stereo_euroc/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="stereo_kitti">
+				<Option output="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Stereo/stereo_kitti" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Monocular"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DCOMPILEDWITHC11"/>
+					<Add directory="/home/wmh/work/ORB_SLAM2_wmh-ubuntu"/>
+					<Add directory="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/include"/>
+					<Add directory="/usr/include/eigen3q"/>
+					<Add directory="/usr/local/lib/cmake/Pangolin/../../../include"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/local/include/opencv"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 stereo_kitti"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="stereo_kitti/fast">
+				<Option output="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Stereo/stereo_kitti" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Monocular"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DCOMPILEDWITHC11"/>
+					<Add directory="/home/wmh/work/ORB_SLAM2_wmh-ubuntu"/>
+					<Add directory="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/include"/>
+					<Add directory="/usr/include/eigen3q"/>
+					<Add directory="/usr/local/lib/cmake/Pangolin/../../../include"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/local/include/opencv"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 stereo_kitti/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rgbd_tum">
+				<Option output="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/RGB-D/rgbd_tum" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Monocular"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DCOMPILEDWITHC11"/>
+					<Add directory="/home/wmh/work/ORB_SLAM2_wmh-ubuntu"/>
+					<Add directory="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/include"/>
+					<Add directory="/usr/include/eigen3q"/>
+					<Add directory="/usr/local/lib/cmake/Pangolin/../../../include"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/local/include/opencv"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 rgbd_tum"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rgbd_tum/fast">
+				<Option output="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/RGB-D/rgbd_tum" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Monocular"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DCOMPILEDWITHC11"/>
+					<Add directory="/home/wmh/work/ORB_SLAM2_wmh-ubuntu"/>
+					<Add directory="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/include"/>
+					<Add directory="/usr/include/eigen3q"/>
+					<Add directory="/usr/local/lib/cmake/Pangolin/../../../include"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/local/include/opencv"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 rgbd_tum/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ORB_SLAM2">
+				<Option output="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/lib/libORB_SLAM2.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DCOMPILEDWITHC11"/>
+					<Add directory="/home/wmh/work/ORB_SLAM2_wmh-ubuntu"/>
+					<Add directory="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/include"/>
+					<Add directory="/usr/include/eigen3q"/>
+					<Add directory="/usr/local/lib/cmake/Pangolin/../../../include"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/local/include/opencv"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 ORB_SLAM2"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ORB_SLAM2/fast">
+				<Option output="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/lib/libORB_SLAM2.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DCOMPILEDWITHC11"/>
+					<Add directory="/home/wmh/work/ORB_SLAM2_wmh-ubuntu"/>
+					<Add directory="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/include"/>
+					<Add directory="/usr/include/eigen3q"/>
+					<Add directory="/usr/local/lib/cmake/Pangolin/../../../include"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/local/include/opencv"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 ORB_SLAM2/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Monocular/mono_euroc.cc">
+			<Option target="mono_euroc"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Monocular/mono_kitti.cc">
+			<Option target="mono_kitti"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Monocular/mono_tum.cc">
+			<Option target="mono_tum"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Monocular/mono_wmh.cc">
+			<Option target="mono_wmh"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/RGB-D/rgbd_tum.cc">
+			<Option target="rgbd_tum"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Stereo/stereo_euroc.cc">
+			<Option target="stereo_euroc"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Stereo/stereo_kitti.cc">
+			<Option target="stereo_kitti"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/src/Converter.cc">
+			<Option target="ORB_SLAM2"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/src/Frame.cc">
+			<Option target="ORB_SLAM2"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/src/FrameDrawer.cc">
+			<Option target="ORB_SLAM2"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/src/Initializer.cc">
+			<Option target="ORB_SLAM2"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/src/KeyFrame.cc">
+			<Option target="ORB_SLAM2"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/src/KeyFrameDatabase.cc">
+			<Option target="ORB_SLAM2"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/src/LocalMapping.cc">
+			<Option target="ORB_SLAM2"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/src/LoopClosing.cc">
+			<Option target="ORB_SLAM2"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/src/Map.cc">
+			<Option target="ORB_SLAM2"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/src/MapDrawer.cc">
+			<Option target="ORB_SLAM2"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/src/MapPoint.cc">
+			<Option target="ORB_SLAM2"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/src/ORBextractor.cc">
+			<Option target="ORB_SLAM2"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/src/ORBmatcher.cc">
+			<Option target="ORB_SLAM2"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/src/Optimizer.cc">
+			<Option target="ORB_SLAM2"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/src/PnPsolver.cc">
+			<Option target="ORB_SLAM2"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/src/Sim3Solver.cc">
+			<Option target="ORB_SLAM2"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/src/System.cc">
+			<Option target="ORB_SLAM2"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/src/Tracking.cc">
+			<Option target="ORB_SLAM2"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/src/Viewer.cc">
+			<Option target="ORB_SLAM2"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Core/Qt5CoreConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Core/Qt5CoreConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Core/Qt5CoreConfigExtras.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Core/Qt5CoreConfigExtrasMkspecDir.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Core/Qt5CoreMacros.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Widgets/Qt5WidgetsConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Widgets\"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Widgets/Qt5WidgetsConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Widgets\"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Widgets/Qt5WidgetsConfigExtras.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Widgets\"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Widgets/Qt5WidgetsMacros.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Widgets\"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Gui/Qt5GuiConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Gui/Qt5GuiConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Gui/Qt5GuiConfigExtras.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/../../../../usr/local/share/OpenCV/OpenCVConfig-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\share\OpenCV\"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/../../../../usr/local/share/OpenCV/OpenCVConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\share\OpenCV\"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/../../../../usr/local/share/OpenCV/OpenCVModules.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\share\OpenCV\"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/../../../../usr/local/share/OpenCV/OpenCVModules-release.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\share\OpenCV\"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/../../../../usr/local/lib/cmake/Pangolin/PangolinConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\lib\cmake\Pangolin\"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/../../../../usr/local/lib/cmake/Pangolin/PangolinConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\lib\cmake\Pangolin\"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/../../../../usr/local/lib/cmake/Pangolin/PangolinTargets.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\lib\cmake\Pangolin\"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/../../../../usr/local/lib/cmake/Pangolin/PangolinTargets-release.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\lib\cmake\Pangolin\"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake_modules/FindEigen3.cmake">
+			<Option virtualFolder="CMake Files\cmake_modules\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

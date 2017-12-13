@@ -472,19 +472,107 @@ void System::SaveTrajectoryKITTI(const string &filename)
 }
 
 
-void System::SaveMapInfo(const string &filename)
+void System::SaveKeyFrameInfo(const string &filename)
 {
-    cout << "Saving map info for wmh, to " << filename << " ..." << endl;
+    // cout << "Saving map info for wmh, to " << filename << " ..." << endl;
 
     // Get the data to print.
     vector<KeyFrame*> vpKFs = mpMap->GetAllKeyFrames();
-    vector<MapPoint*> vpMPs = mpMap->GetAllMapPoints();
-    cout << "Got " << vpKFs.size() << " Key Frames;";
-    cout << " and " << vpMPs.size() << " Map Points." << endl;
+    // vector<MapPoint*> vpMPs = mpMap->GetAllMapPoints();
+    cout << "Got " << vpKFs.size() << " Key Frames;" << endl;
+    // cout << " and " << vpMPs.size() << " Map Points." << endl;
     
     // Write file
+    cout << "saving a log to " << filename << endl;
+    ofstream f;
+    f.open(filename.c_str());
+    f << fixed;
 
+    // -- Write info of KeyFrame
+    // f << "Got " << vpKFs.size() << " Key Frames:"<< endl;
+    
+    // Head line of a CSV file
+    f << "mnID,";
+    f <<"nmFrameID,";
+    f <<"TimeStamp,";
+    f <<"mnGridCols,";
+    f <<"mnGridRows,";
+    f <<"KeyPoints,";
+    f <<"PoseX,";
+    f <<"PoseY,";
+    f <<"PoseZ"<< endl;
+
+    // Loop over key frames
+    for (size_t i=0; i < vpKFs.size(); i++)
+    {
+        // f << "mnID:" << vpKFs[i]->mnId << endl;
+        // f << "nmFrameID:" << vpKFs[i]->mnFrameId << endl;
+        // f << "TimeStamp:" << vpKFs[i]->mTimeStamp << endl;
+        // f << "mnGridCols:" << vpKFs[i]->mnGridCols << ", Rows:" <<  vpKFs[i]->mnGridRows << endl;
+        // f << "KeyPoints:" << vpKFs[i]->N << endl;
+        // cv::Mat Tcw = vpKFs[i]->GetPose();
+        // f << "Pose:"<< Tcw.at<float>(0,3)<< ", " << Tcw.at<float>(1,3)<< ", " << Tcw.at<float>(2,3) << endl;
+        // f << endl;
+
+        // For CSV Format output
+        cv::Mat T = vpKFs[i]->GetCameraCenter();
+        f << vpKFs[i]->mnId << ",";
+        f << vpKFs[i]->mnFrameId << ",";
+        f << vpKFs[i]->mTimeStamp << ",";
+        f << vpKFs[i]->mnGridCols << ",";
+        f << vpKFs[i]->mnGridRows << ",";
+        f << vpKFs[i]->N << ",";
+        f << T.at<float>(0,3) << ",";
+        f << T.at<float>(1,3) << ",";
+        f << T.at<float>(2,3) << endl;
+    }
+
+    f.close();
 }
+
+void System::SaveMapPointInfo(const string &filename)
+{
+    vector<MapPoint*> vpMPs = mpMap->GetAllMapPoints();
+    cout << "Got " << vpMPs.size() << " Map Points;" << endl;
+
+    // Write file
+    cout << "saving a log to " << filename << endl;
+    ofstream f;
+    f.open(filename.c_str());
+    f << fixed;
+
+    // -- Write info of MapPoint
+    // Head line of a CSV file
+    // f << "mnID,";
+    // f <<"nmFrameID,";
+    // f <<"TimeStamp,";
+    // f <<"mnGridCols,";
+    // f <<"mnGridRows,";
+    // f <<"KeyPoints,";
+    // f <<"PoseX,";
+    // f <<"PoseY,";
+    // f <<"PoseZ"<< endl;
+
+    // TODO: Add output field according to MapPoint.h and .cc
+    // Loop over map points
+    for (size_t i=0; i < vpMPs.size(); i++)
+    {
+        // For CSV Format output
+        cv::Mat T = vpMPs[i]->GetWorldPos();
+        // f << vpKFs[i]->mnId << ",";
+        // f << vpKFs[i]->mnFrameId << ",";
+        // f << vpKFs[i]->mTimeStamp << ",";
+        // f << vpKFs[i]->mnGridCols << ",";
+        // f << vpKFs[i]->mnGridRows << ",";
+        // f << vpKFs[i]->N << ",";
+        f << T.at<float>(0,3) << ",";
+        f << T.at<float>(1,3) << ",";
+        f << T.at<float>(2,3) << endl;
+    }
+
+    f.close();
+}
+
 
 int System::GetTrackingState()
 {

@@ -51,6 +51,7 @@ void MapDrawer::DrawMapPoints()
     if(vpMPs.empty())
         return;
 
+    // For all Map Points, in BLACK
     glPointSize(mPointSize);
     glBegin(GL_POINTS);
     glColor3f(0.0,0.0,0.0);
@@ -64,6 +65,8 @@ void MapDrawer::DrawMapPoints()
     }
     glEnd();
 
+
+    // For current ref Map Points, in RED
     glPointSize(mPointSize);
     glBegin(GL_POINTS);
     glColor3f(1.0,0.0,0.0);

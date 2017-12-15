@@ -121,7 +121,7 @@ int main(int argc, char **argv)
         // else if(ni>0)
         //     T = tframe-vTimestamps[ni-1];
 
-        double T = 0.2;
+        double T = 0.1;  // T set to 0.1 (10Hz)when debug, 0.2 (5Hz)when Cozmo realtime test, 0 when full speed
         if(ttrack<T)
             usleep((T-ttrack)*1e6);
 

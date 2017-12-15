@@ -85,7 +85,7 @@ void MapDrawer::DrawMapPoints()
 
 void MapDrawer::DrawKeyFrames(const bool bDrawKF, const bool bDrawGraph)
 {
-    const float &w = mKeyFrameSize;
+    const float &w = mKeyFrameSize *0.5; // smaller cam in the window -- by wmh
     const float h = w*0.75;
     const float z = w*0.6;
 
@@ -181,7 +181,7 @@ void MapDrawer::DrawKeyFrames(const bool bDrawKF, const bool bDrawGraph)
 
 void MapDrawer::DrawCurrentCamera(pangolin::OpenGlMatrix &Twc)
 {
-    const float &w = mCameraSize;
+    const float &w = mCameraSize *0.5;  // smaller cam in the window -- by wmh
     const float h = w*0.75;
     const float z = w*0.6;
 

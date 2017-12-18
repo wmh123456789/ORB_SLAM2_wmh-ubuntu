@@ -52,7 +52,7 @@ void MapDrawer::DrawMapPoints()
         return;
 
     // For all Map Points, in BLACK
-    glPointSize(mPointSize);
+    glPointSize(mPointSize /1.5);
     glBegin(GL_POINTS);
     glColor3f(0.0,0.0,0.0);
 
@@ -67,7 +67,7 @@ void MapDrawer::DrawMapPoints()
 
 
     // For current ref Map Points, in RED
-    glPointSize(mPointSize);
+    glPointSize(mPointSize /1.5);
     glBegin(GL_POINTS);
     glColor3f(1.0,0.0,0.0);
 

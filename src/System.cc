@@ -532,7 +532,8 @@ void System::SaveKeyFrameInfo(const string &filename)
 
 void System::SaveMapPointInfo(const string &filename)
 {
-    vector<MapPoint*> vpMPs = mpMap->GetAllMapPoints();
+//    vector<MapPoint*> vpMPs = mpMap->GetAllMapPoints();
+    const vector<MapPoint*> &vpMPs = mpMap->GetAllMapPoints();
     cout << "Got " << vpMPs.size() << " Map Points;" << endl;
 
     // Write file
@@ -543,31 +544,37 @@ void System::SaveMapPointInfo(const string &filename)
 
     // -- Write info of MapPoint
     // Head line of a CSV file
-    // f << "mnID,";
-    // f <<"nmFrameID,";
-    // f <<"TimeStamp,";
-    // f <<"mnGridCols,";
-    // f <<"mnGridRows,";
-    // f <<"KeyPoints,";
-    // f <<"PoseX,";
-    // f <<"PoseY,";
-    // f <<"PoseZ"<< endl;
+    f << "mnId,";
+    f << "RefKF.Id,";
+    f << "RefKF.FrameId,";
+
+    f << "NextId,";
+    f << "FirstKF,";
+    f << "FirstFrame,";
+
+    f <<"PoseX,";
+    f <<"PoseY,";
+    f <<"PoseZ"<< endl;
 
     // TODO: Add output field according to MapPoint.h and .cc
     // Loop over map points
     for (size_t i=0; i < vpMPs.size(); i++)
     {
+        if(vpMPs[i]->isBad())
+            continue;
         // For CSV Format output
-        cv::Mat T = vpMPs[i]->GetWorldPos();
-        // f << vpKFs[i]->mnId << ",";
-        // f << vpKFs[i]->mnFrameId << ",";
-        // f << vpKFs[i]->mTimeStamp << ",";
-        // f << vpKFs[i]->mnGridCols << ",";
-        // f << vpKFs[i]->mnGridRows << ",";
-        // f << vpKFs[i]->N << ",";
-        f << T.at<float>(0,3) << ",";
-        f << T.at<float>(1,3) << ",";
-        f << T.at<float>(2,3) << endl;
+        cv::Mat pos = vpMPs[i]->GetWorldPos();
+        f << vpMPs[i]->mnId << ",";
+        f << vpMPs[i]->GetReferenceKeyFrame()->mnId << ",";
+        f << vpMPs[i]->GetReferenceKeyFrame()->mnFrameId << ",";
+
+        f << vpMPs[i]->nNextId << ",";
+        f << vpMPs[i]->mnFirstKFid << ",";
+        f << vpMPs[i]->mnFirstFrame << ",";
+
+        f << pos.at<float>(0) << ",";
+        f << pos.at<float>(1) << ",";
+        f << pos.at<float>(2) << endl;
     }
 
     f.close();

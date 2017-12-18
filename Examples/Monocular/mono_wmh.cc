@@ -127,7 +127,7 @@ int main(int argc, char **argv)
 
         // Save save results for coodinate study.  by wmh
         // SLAM.SaveKeyFrameInfo("./MapInfo/KFInfo_"+ni_s+".csv");
-        // SLAM.SaveMapPointInfo("./MapInfo/MPInfo_"+ni_s+".csv");
+         SLAM.SaveMapPointInfo("./MapInfo/MPInfo_"+ni_s+".csv");
         ni++;
     }
 

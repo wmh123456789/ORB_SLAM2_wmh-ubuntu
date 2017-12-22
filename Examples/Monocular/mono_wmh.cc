@@ -136,6 +136,12 @@ int main(int argc, char **argv)
         ni++;
     }
 
+    // Wait keyboard input before end.   by wmh
+    // TODO: timer should be paused here
+    char input;
+    cout << "All images are finished, end by input any key." << endl;
+    cin >> input;
+
     // Stop all threads
     SLAM.Shutdown();
 

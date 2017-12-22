@@ -44,9 +44,9 @@ MapDrawer::MapDrawer(Map* pMap, const string &strSettingPath):mpMap(pMap)
 void MapDrawer::DrawBaseGrid()
 {
     float GridStep = 0.1;    // the size of each cell in grid
-    float GridSize = 1.0;    // the radius of the whole grid
-    int   GridLineNum = 10;  // half-lines number in one direction
-
+    float GridSize = 3.0;    // the radius of the whole grid
+    int   GridLineNum;  // half-lines number in one direction
+    GridLineNum =  GridSize/GridStep;
 
     // Mark X(r),Y(g), Z(b) axis with 3 unit vectors
     glBegin(GL_LINES);
@@ -108,6 +108,11 @@ void MapDrawer::DrawMapPoints()
         if(vpMPs[i]->isBad() || spRefMPs.count(vpMPs[i]))
             continue;
         cv::Mat pos = vpMPs[i]->GetWorldPos();
+
+    //  Hide the points on "XOZ" plane    by wmh
+//        if (pos.at<float>(1) > -0.01)
+//            glColor3f(1.0,1.0,1.0);
+
         glVertex3f(pos.at<float>(0),pos.at<float>(1),pos.at<float>(2));
     }
     glEnd();
@@ -123,6 +128,10 @@ void MapDrawer::DrawMapPoints()
         if((*sit)->isBad())
             continue;
         cv::Mat pos = (*sit)->GetWorldPos();
+
+    //     Hide the points on "XOZ" plane    by wmh
+//        if (pos.at<float>(1) > -0.01)
+//            glColor3f(1.0,1.0,1.0);
         glVertex3f(pos.at<float>(0),pos.at<float>(1),pos.at<float>(2));
 
     }

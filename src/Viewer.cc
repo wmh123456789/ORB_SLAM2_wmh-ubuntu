@@ -131,6 +131,7 @@ void Viewer::Run()
             mpMapDrawer->DrawKeyFrames(menuShowKeyFrames,menuShowGraph);
         if(menuShowPoints)
             mpMapDrawer->DrawMapPoints();
+        mpMapDrawer->DrawBaseGrid(); // By wmh
 
         pangolin::FinishFrame();
 

@@ -37,7 +37,7 @@ public:
     MapDrawer(Map* pMap, const string &strSettingPath);
 
     Map* mpMap;
-
+    void DrawBaseGrid();
     void DrawMapPoints();
     void DrawKeyFrames(const bool bDrawKF, const bool bDrawGraph);
     void DrawCurrentCamera(pangolin::OpenGlMatrix &Twc);

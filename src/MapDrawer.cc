@@ -41,6 +41,53 @@ MapDrawer::MapDrawer(Map* pMap, const string &strSettingPath):mpMap(pMap)
 
 }
 
+void MapDrawer::DrawBaseGrid()
+{
+    float GridStep = 0.1;    // the size of each cell in grid
+    float GridSize = 1.0;    // the radius of the whole grid
+    int   GridLineNum = 10;  // half-lines number in one direction
+
+
+    // Mark X(r),Y(g), Z(b) axis with 3 unit vectors
+    glBegin(GL_LINES);
+    glLineWidth(5);
+    glColor3f(1.0f,0.0f,0.0f);
+    glVertex3f( 0.05, 0, 0);
+    glVertex3f( 0, 0, 0);
+
+    glColor3f(0.0f,1.0f,0.0f);
+    glVertex3f( 0, 0.08, 0);
+    glVertex3f( 0, 0, 0);
+
+    glColor3f(0.0f,0.0f,1.0f);
+    glVertex3f( 0, 0, 0.11);
+    glVertex3f( 0, 0, 0);
+    glEnd();
+
+    // Draw grid
+    glBegin(GL_LINES);
+    glLineWidth(0.5f);
+    glColor3f(0.8f,0.8f,0.8f);
+    for (int i = 0; i < GridLineNum; i++)
+    {
+        // X direction lines
+        glVertex3f(    GridSize, 0,   GridStep*i);
+        glVertex3f( -1*GridSize, 0,   GridStep*i);
+        glVertex3f(    GridSize, 0,-1*GridStep*i);
+        glVertex3f( -1*GridSize, 0,-1*GridStep*i);
+
+        // Z direction lines
+        glVertex3f(   GridStep*i, 0,    GridSize);
+        glVertex3f(   GridStep*i, 0, -1*GridSize);
+        glVertex3f(-1*GridStep*i, 0,    GridSize);
+        glVertex3f(-1*GridStep*i, 0, -1*GridSize);
+    }
+
+    glEnd();
+
+    return;
+}
+
 void MapDrawer::DrawMapPoints()
 {
     const vector<MapPoint*> &vpMPs = mpMap->GetAllMapPoints();

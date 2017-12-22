@@ -81,13 +81,18 @@ int main(int argc, char **argv)
         im = cv::imread(string(argv[3])+"/"+ni_s+".jpg",CV_LOAD_IMAGE_UNCHANGED); // Read image from file buffer.  By wmh
         if(im.empty())
         {
-            cerr << endl << "Failed to load image at: "
-                 << string(argv[3]) << "/" << ni_s +".jpg"<< endl;
-            // return 1;
-            break;
+            im = cv::imread(string(argv[3])+"/"+ni_s+".png",CV_LOAD_IMAGE_UNCHANGED);
+            if(im.empty())
+            {
+                cerr << endl << "Failed to load image at: "
+                     << string(argv[3]) << "/" << ni_s +".jpg/png"<< endl;
+                // return 1;
+                break;
+            }
         }
+
         
-        cout << "Image: "<< ni_s << ".jpg is loaded.  " << endl;
+        cout << "Image: "<< ni_s << ".jpg/png is loaded.  " << endl;
         // double tframe = vTimestamps[ni];
         double tframe = LoadTimestamp(string(argv[3])+"/"+ ni_s + ".txt");
         // cout << "@Timestamp: " << tframe << endl;

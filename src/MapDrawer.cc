@@ -89,7 +89,15 @@ void MapDrawer::DrawBaseGrid()
         glVertex3f(-1*GridStep*i,   GridSize*y_z,    GridSize);
         glVertex3f(-1*GridStep*i,-1*GridSize*y_z, -1*GridSize);
     }
+    glEnd();
 
+    // Draw a plane by a rectangle
+    glBegin(GL_POLYGON);
+    glColor3f(0.9f,0.5f,0.5f);
+    glVertex3f(GridSize, 0.0f,     0.0f);
+    glVertex3f(GridSize, 0.0f, GridSize);
+    glVertex3f(    0.0f, 0.0f, GridSize);
+    glVertex3f(    0.0f, 0.0f,     0.0f);
     glEnd();
 
     return;
@@ -142,6 +150,8 @@ void MapDrawer::DrawMapPoints()
             continue;
         cv::Mat pos = (*sit)->GetWorldPos();
 
+
+
         //  Hide the points under the base plane    by wmh
         // Distance to base plane: cos(theta)*y - sin(theta)*z
         if (cos(mHeadAngle)*pos.at<float>(1) - sin(mHeadAngle)*pos.at<float>(2) > 0.05)
@@ -153,6 +163,88 @@ void MapDrawer::DrawMapPoints()
     }
 
     glEnd();
+}
+
+
+    // If the cozmo's head angle is theta, than
+    // the rotation vactor is R = [0, cos(theta), -sin(theta)]'
+    // the base plane is R'X = 0, where X = [x,y,z]'
+    // and if the coordinate of a Map point is P = [xp,yp,zp]'
+    // then the distance to base plane is RP
+    // the projection to base plane is Y = P - R'PR
+void MapDrawer::DrawMapPointsProj()
+{
+    const vector<MapPoint*> &vpMPs = mpMap->GetAllMapPoints();
+    const vector<MapPoint*> &vpRefMPs = mpMap->GetReferenceMapPoints();
+
+    set<MapPoint*> spRefMPs(vpRefMPs.begin(), vpRefMPs.end());
+
+    if(vpMPs.empty())
+        return;
+
+    float dist;
+
+    // For all Map Points, in BLACK
+    glPointSize(mPointSize /1.5);
+    glBegin(GL_POINTS);
+    glColor3f(0.0,0.0,0.0);
+
+    for(size_t i=0, iend=vpMPs.size(); i<iend;i++)
+    {
+        if(vpMPs[i]->isBad() || spRefMPs.count(vpMPs[i]))
+            continue;
+        cv::Mat pos = vpMPs[i]->GetWorldPos();
+        cv::Mat proj = pos.clone();
+//        cv::Mat rot = cv::Mat::zeros(3,1,CV_32F);
+        cv::Mat rot = (cv::Mat_<float>(3,1) << 0.0, cos(mHeadAngle), -sin(mHeadAngle));
+
+        dist = pos.dot(rot);
+        proj = pos - dist*rot;
+
+        //  Hide the points under the base plane    by wmh
+        // Distance to base plane: cos(theta)*y - sin(theta)*z
+        if (cos(mHeadAngle)*pos.at<float>(1) - sin(mHeadAngle)*pos.at<float>(2) > 0.05)
+            glColor3f(1.0, 1.0, 1.0);
+        else
+            glColor3f(0.5, 0.0, 0.5);
+
+        glVertex3f(proj.at<float>(0), proj.at<float>(1), proj.at<float>(2));
+
+    }
+    glEnd();
+
+
+    // For current ref Map Points, in RED
+    glPointSize(mPointSize /1.5);
+    glBegin(GL_POINTS);
+    glColor3f(1.0,0.0,0.0);
+
+    for(set<MapPoint*>::iterator sit=spRefMPs.begin(), send=spRefMPs.end(); sit!=send; sit++)
+    {
+        if((*sit)->isBad())
+            continue;
+        cv::Mat pos = (*sit)->GetWorldPos();
+
+        cv::Mat proj = pos.clone();
+//        cv::Mat rot = cv::Mat::zeros(3,1,CV_32F);
+        cv::Mat rot = (cv::Mat_<float>(3,1) << 0.0, cos(mHeadAngle), -sin(mHeadAngle));
+
+        dist = pos.dot(rot);
+        proj = pos - dist*rot;
+
+
+        //  Hide the points under the base plane    by wmh
+        // Distance to base plane: cos(theta)*y - sin(theta)*z
+        if (cos(mHeadAngle)*pos.at<float>(1) - sin(mHeadAngle)*pos.at<float>(2) > 0.05)
+            glColor3f(1.0, 1.0, 1.0);
+        else
+            glColor3f(0.5, 0.5, 0.0);
+        glVertex3f(proj.at<float>(0),proj.at<float>(1),proj.at<float>(2));
+
+    }
+
+    glEnd();
+
 }
 
 void MapDrawer::DrawKeyFrames(const bool bDrawKF, const bool bDrawGraph)

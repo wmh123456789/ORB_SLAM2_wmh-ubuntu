@@ -39,8 +39,11 @@ MapDrawer::MapDrawer(Map* pMap, const string &strSettingPath):mpMap(pMap)
     mCameraSize = fSettings["Viewer.CameraSize"];
     mCameraLineWidth = fSettings["Viewer.CameraLineWidth"];
 
+    mHeadAngle = -5.0 /180*3.14; // the head angle of cozmo
+
 }
 
+// Draw the base plane by a grid
 void MapDrawer::DrawBaseGrid()
 {
     float GridStep = 0.1;    // the size of each cell in grid
@@ -64,23 +67,27 @@ void MapDrawer::DrawBaseGrid()
     glVertex3f( 0, 0, 0);
     glEnd();
 
-    // Draw grid
+    // Draw grid by wmh
     glBegin(GL_LINES);
     glLineWidth(0.5f);
     glColor3f(0.8f,0.8f,0.8f);
+
+
+    float y_z = tan(mHeadAngle);
     for (int i = 0; i < GridLineNum; i++)
     {
+        // Draw grid in plane: y = tan(head_angle)*z
         // X direction lines
-        glVertex3f(    GridSize, 0,   GridStep*i);
-        glVertex3f( -1*GridSize, 0,   GridStep*i);
-        glVertex3f(    GridSize, 0,-1*GridStep*i);
-        glVertex3f( -1*GridSize, 0,-1*GridStep*i);
+        glVertex3f(    GridSize,    GridStep*i*y_z,   GridStep*i);
+        glVertex3f( -1*GridSize,    GridStep*i*y_z,   GridStep*i);
+        glVertex3f(    GridSize, -1*GridStep*i*y_z,-1*GridStep*i);
+        glVertex3f( -1*GridSize, -1*GridStep*i*y_z,-1*GridStep*i);
 
         // Z direction lines
-        glVertex3f(   GridStep*i, 0,    GridSize);
-        glVertex3f(   GridStep*i, 0, -1*GridSize);
-        glVertex3f(-1*GridStep*i, 0,    GridSize);
-        glVertex3f(-1*GridStep*i, 0, -1*GridSize);
+        glVertex3f(   GridStep*i,   GridSize*y_z,    GridSize);
+        glVertex3f(   GridStep*i,-1*GridSize*y_z, -1*GridSize);
+        glVertex3f(-1*GridStep*i,   GridSize*y_z,    GridSize);
+        glVertex3f(-1*GridStep*i,-1*GridSize*y_z, -1*GridSize);
     }
 
     glEnd();
@@ -109,11 +116,17 @@ void MapDrawer::DrawMapPoints()
             continue;
         cv::Mat pos = vpMPs[i]->GetWorldPos();
 
-    //  Hide the points on "XOZ" plane    by wmh
-//        if (pos.at<float>(1) > -0.01)
-//            glColor3f(1.0,1.0,1.0);
+    //  Hide the points under the base plane    by wmh
+    // Distance to base plane: cos(theta)*y - sin(theta)*z
+        if (cos(mHeadAngle)*pos.at<float>(1) - sin(mHeadAngle)*pos.at<float>(2) > 0.05)
+            glColor3f(1.0, 1.0, 1.0);
+        else
+            glColor3f(0.0, 0.0, 0.0);
 
-        glVertex3f(pos.at<float>(0),pos.at<float>(1),pos.at<float>(2));
+        glVertex3f(pos.at<float>(0), pos.at<float>(1), pos.at<float>(2));
+
+
+
     }
     glEnd();
 
@@ -129,9 +142,12 @@ void MapDrawer::DrawMapPoints()
             continue;
         cv::Mat pos = (*sit)->GetWorldPos();
 
-    //     Hide the points on "XOZ" plane    by wmh
-//        if (pos.at<float>(1) > -0.01)
-//            glColor3f(1.0,1.0,1.0);
+        //  Hide the points under the base plane    by wmh
+        // Distance to base plane: cos(theta)*y - sin(theta)*z
+        if (cos(mHeadAngle)*pos.at<float>(1) - sin(mHeadAngle)*pos.at<float>(2) > 0.05)
+            glColor3f(1.0, 1.0, 1.0);
+        else
+            glColor3f(1.0, 0.0, 0.0);
         glVertex3f(pos.at<float>(0),pos.at<float>(1),pos.at<float>(2));
 
     }

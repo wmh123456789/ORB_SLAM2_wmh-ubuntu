@@ -54,6 +54,8 @@ private:
     float mCameraSize;
     float mCameraLineWidth;
 
+    float mHeadAngle;  //the head angle of cozmo by wmh
+
     cv::Mat mCameraPose;
 
     std::mutex mMutexCamera;

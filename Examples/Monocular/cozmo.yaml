@@ -22,6 +22,12 @@ Camera.fps: 5.0
 # Color order of the images (0: BGR, 1: RGB. It is ignored if images are grayscale)
 Camera.RGB: 1
 
+# Head angle of cozmo in radian   by wmh
+#  5 /180*pi = 0.08727
+# 15 /180*pi = 0.2618
+# 25 /180*pi = 0.4363
+Camera.Angle: -0.2618
+
 #--------------------------------------------------------------------------------------------
 # ORB Parameters
 #--------------------------------------------------------------------------------------------

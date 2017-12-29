@@ -39,8 +39,8 @@ MapDrawer::MapDrawer(Map* pMap, const string &strSettingPath):mpMap(pMap)
     mCameraSize = fSettings["Viewer.CameraSize"];
     mCameraLineWidth = fSettings["Viewer.CameraLineWidth"];
 
-    mHeadAngle = -5.0 /180*3.14; // the head angle of cozmo
-
+//    mHeadAngle = -25.0 /180*3.14; // the head angle of cozmo
+    mHeadAngle = fSettings["Camera.Angle"];  // Edit this in yaml file  by wmh
 }
 
 // Draw the base plane by a grid
@@ -165,7 +165,7 @@ void MapDrawer::DrawMapPoints()
     glEnd();
 }
 
-
+    // By wmh
     // If the cozmo's head angle is theta, than
     // the rotation vactor is R = [0, cos(theta), -sin(theta)]'
     // the base plane is R'X = 0, where X = [x,y,z]'

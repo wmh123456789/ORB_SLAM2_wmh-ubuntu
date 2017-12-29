@@ -268,6 +268,17 @@ cv::Mat Tracking::GrabImageMonocular(const cv::Mat &im, const double &timestamp)
 
     Track();
 
+    // output the position of current frame   by wmh
+//    cv::Mat CamPos = mCurrentFrame.GetCameraCenter();
+//    if (CamPos.rows > 0)
+//    {
+//        cout<< "CurrentFrame No."<< mCurrentFrame.mnId <<" at(mOw): "
+//            << CamPos.at<float>(0) << "; "
+//            << CamPos.at<float>(1) << "; "
+//            << CamPos.at<float>(2)<< endl;
+//    }
+
+
     return mCurrentFrame.mTcw.clone();
 }
 

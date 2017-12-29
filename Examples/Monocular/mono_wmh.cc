@@ -107,7 +107,19 @@ int main(int argc, char **argv)
 #endif
 
         // Pass the image to the SLAM system
-        SLAM.TrackMonocular(im,tframe);
+        cv::Mat Tcw = SLAM.TrackMonocular(im,tframe);
+
+//        // output the Tcw of current frame   by wmh
+//        if (Tcw.rows > 0)
+//        {
+//            cout<< "Tcw:"
+//                << Tcw.at<float>(0)
+//                << Tcw.at<float>(1)
+//                << Tcw.at<float>(2) << endl;
+//        }
+
+
+
 
 #ifdef COMPILEDWITHC11
         std::chrono::steady_clock::time_point t2 = std::chrono::steady_clock::now();
@@ -132,7 +144,8 @@ int main(int argc, char **argv)
 
         // Save save results for coodinate study.  by wmh
         // SLAM.SaveKeyFrameInfo("./MapInfo/KFInfo_"+ni_s+".csv");
-         SLAM.SaveMapPointInfo("./MapInfo/MPInfo_"+ni_s+".csv");
+        SLAM.SaveCurrentFrameInfo(string(argv[3])+"/CurFrmInfo.csv");
+        SLAM.SaveMapPointInfo("./MapInfo/MPInfo_"+ni_s+".csv");
         ni++;
     }
 

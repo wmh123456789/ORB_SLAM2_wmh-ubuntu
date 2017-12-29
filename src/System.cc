@@ -471,7 +471,7 @@ void System::SaveTrajectoryKITTI(const string &filename)
     cout << endl << "trajectory saved!" << endl;
 }
 
-
+// by wmh
 void System::SaveKeyFrameInfo(const string &filename)
 {
     // cout << "Saving map info for wmh, to " << filename << " ..." << endl;
@@ -483,7 +483,7 @@ void System::SaveKeyFrameInfo(const string &filename)
     // cout << " and " << vpMPs.size() << " Map Points." << endl;
     
     // Write file
-    cout << "saving a log to " << filename << endl;
+    cout << "Saving a log to " << filename << endl;
     ofstream f;
     f.open(filename.c_str());
     f << fixed;
@@ -537,7 +537,7 @@ void System::SaveMapPointInfo(const string &filename)
     cout << "Got " << vpMPs.size() << " Map Points;" << endl;
 
     // Write file
-    cout << "saving a log to " << filename << endl;
+    cout << "Saving a log to " << filename << endl;
     ofstream f;
     f.open(filename.c_str());
     f << fixed;
@@ -580,6 +580,45 @@ void System::SaveMapPointInfo(const string &filename)
     f.close();
 }
 
+// Out put the camera position of Current frame  by wmh
+void System::SaveCurrentFrameInfo(const string &filename)
+{
+    cv::Mat CamPos = mpTracker->mCurrentFrame.GetCameraCenter();
+
+//    // Print the camera position
+//    if (CamPos.rows > 0)
+//    {
+//        cout<< "CurrentFrame No."<<  mpTracker->mCurrentFrame.mnId <<" at(mOw): "
+//            << CamPos.at<float>(0) << "; "
+//            << CamPos.at<float>(1) << "; "
+//            << CamPos.at<float>(2)<< endl;
+//    }
+
+    // Write file
+    cout << "Saving camera position to " << filename << endl;
+    ofstream f;
+    if (mpTracker->mCurrentFrame.mnId == 0)
+        f.open(filename.c_str());
+    else
+        f.open(filename.c_str(),ios::app);
+
+    f << fixed;
+    f << mpTracker->mCurrentFrame.mnId << ", ";
+    f << mpTracker->mCurrentFrame.mTimeStamp << ", ";
+    if (CamPos.rows > 0)
+    {
+
+        f << CamPos.at<float>(0)<< ", ";
+        f << CamPos.at<float>(1)<< ", ";
+        f << CamPos.at<float>(2)<< endl;
+    }
+    else
+    {
+        f << "xx, yy, zz" << endl;
+    }
+
+    f.close();
+}
 
 int System::GetTrackingState()
 {

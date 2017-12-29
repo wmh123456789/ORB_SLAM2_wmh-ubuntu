@@ -120,6 +120,7 @@ public:
     // For Map ralated research.  by wmh
     void SaveKeyFrameInfo(const string &filename);
     void SaveMapPointInfo(const string &filename);
+    void SaveCurrentFrameInfo(const string &filename);
 
     // Information from most recent processed frame
     // You can call this right after TrackMonocular (or stereo or RGBD)

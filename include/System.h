@@ -37,6 +37,14 @@
 #include "ORBVocabulary.h"
 #include "Viewer.h"
 
+// for Kalman filter  by wmh
+#include <opencv2/video/tracking.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <iostream>
+#include <stdio.h>
+
+
+
 namespace ORB_SLAM2
 {
 
@@ -121,6 +129,9 @@ public:
     void SaveKeyFrameInfo(const string &filename);
     void SaveMapPointInfo(const string &filename);
     void SaveCurrentFrameInfo(const string &filename);
+
+    // Try Kalman filter with IMU info by wmh
+    void TryKalmanFilter(const string &filename);
 
     // Information from most recent processed frame
     // You can call this right after TrackMonocular (or stereo or RGBD)

@@ -1472,6 +1472,7 @@ CMakeFiles/ORB_SLAM2.dir/src/Initializer.cc.o: /usr/local/lib/cmake/Pangolin/../
 CMakeFiles/ORB_SLAM2.dir/src/Initializer.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/flann/saving.h
 CMakeFiles/ORB_SLAM2.dir/src/Initializer.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/flann/timer.h
 CMakeFiles/ORB_SLAM2.dir/src/Initializer.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/highgui.hpp
+CMakeFiles/ORB_SLAM2.dir/src/Initializer.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/highgui/highgui.hpp
 CMakeFiles/ORB_SLAM2.dir/src/Initializer.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/highgui/highgui_c.h
 CMakeFiles/ORB_SLAM2.dir/src/Initializer.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/imgcodecs.hpp
 CMakeFiles/ORB_SLAM2.dir/src/Initializer.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/imgcodecs/imgcodecs_c.h
@@ -2421,6 +2422,7 @@ CMakeFiles/ORB_SLAM2.dir/src/LocalMapping.cc.o: /usr/local/lib/cmake/Pangolin/..
 CMakeFiles/ORB_SLAM2.dir/src/LocalMapping.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/flann/saving.h
 CMakeFiles/ORB_SLAM2.dir/src/LocalMapping.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/flann/timer.h
 CMakeFiles/ORB_SLAM2.dir/src/LocalMapping.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/highgui.hpp
+CMakeFiles/ORB_SLAM2.dir/src/LocalMapping.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/highgui/highgui.hpp
 CMakeFiles/ORB_SLAM2.dir/src/LocalMapping.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/highgui/highgui_c.h
 CMakeFiles/ORB_SLAM2.dir/src/LocalMapping.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/imgcodecs.hpp
 CMakeFiles/ORB_SLAM2.dir/src/LocalMapping.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/imgcodecs/imgcodecs_c.h
@@ -2864,6 +2866,7 @@ CMakeFiles/ORB_SLAM2.dir/src/LoopClosing.cc.o: /usr/local/lib/cmake/Pangolin/../
 CMakeFiles/ORB_SLAM2.dir/src/LoopClosing.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/flann/saving.h
 CMakeFiles/ORB_SLAM2.dir/src/LoopClosing.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/flann/timer.h
 CMakeFiles/ORB_SLAM2.dir/src/LoopClosing.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/highgui.hpp
+CMakeFiles/ORB_SLAM2.dir/src/LoopClosing.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/highgui/highgui.hpp
 CMakeFiles/ORB_SLAM2.dir/src/LoopClosing.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/highgui/highgui_c.h
 CMakeFiles/ORB_SLAM2.dir/src/LoopClosing.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/imgcodecs.hpp
 CMakeFiles/ORB_SLAM2.dir/src/LoopClosing.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/imgcodecs/imgcodecs_c.h
@@ -4293,6 +4296,7 @@ CMakeFiles/ORB_SLAM2.dir/src/Optimizer.cc.o: /usr/local/lib/cmake/Pangolin/../..
 CMakeFiles/ORB_SLAM2.dir/src/Optimizer.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/flann/saving.h
 CMakeFiles/ORB_SLAM2.dir/src/Optimizer.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/flann/timer.h
 CMakeFiles/ORB_SLAM2.dir/src/Optimizer.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/highgui.hpp
+CMakeFiles/ORB_SLAM2.dir/src/Optimizer.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/highgui/highgui.hpp
 CMakeFiles/ORB_SLAM2.dir/src/Optimizer.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/highgui/highgui_c.h
 CMakeFiles/ORB_SLAM2.dir/src/Optimizer.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/imgcodecs.hpp
 CMakeFiles/ORB_SLAM2.dir/src/Optimizer.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/imgcodecs/imgcodecs_c.h
@@ -5023,6 +5027,7 @@ CMakeFiles/ORB_SLAM2.dir/src/System.cc.o: /usr/local/lib/cmake/Pangolin/../../..
 CMakeFiles/ORB_SLAM2.dir/src/System.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/flann/saving.h
 CMakeFiles/ORB_SLAM2.dir/src/System.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/flann/timer.h
 CMakeFiles/ORB_SLAM2.dir/src/System.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/highgui.hpp
+CMakeFiles/ORB_SLAM2.dir/src/System.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/highgui/highgui.hpp
 CMakeFiles/ORB_SLAM2.dir/src/System.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/highgui/highgui_c.h
 CMakeFiles/ORB_SLAM2.dir/src/System.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/imgcodecs.hpp
 CMakeFiles/ORB_SLAM2.dir/src/System.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/imgcodecs/imgcodecs_c.h
@@ -5466,6 +5471,7 @@ CMakeFiles/ORB_SLAM2.dir/src/Tracking.cc.o: /usr/local/lib/cmake/Pangolin/../../
 CMakeFiles/ORB_SLAM2.dir/src/Tracking.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/flann/saving.h
 CMakeFiles/ORB_SLAM2.dir/src/Tracking.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/flann/timer.h
 CMakeFiles/ORB_SLAM2.dir/src/Tracking.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/highgui.hpp
+CMakeFiles/ORB_SLAM2.dir/src/Tracking.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/highgui/highgui.hpp
 CMakeFiles/ORB_SLAM2.dir/src/Tracking.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/highgui/highgui_c.h
 CMakeFiles/ORB_SLAM2.dir/src/Tracking.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/imgcodecs.hpp
 CMakeFiles/ORB_SLAM2.dir/src/Tracking.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/imgcodecs/imgcodecs_c.h
@@ -5904,6 +5910,7 @@ CMakeFiles/ORB_SLAM2.dir/src/Viewer.cc.o: /usr/local/lib/cmake/Pangolin/../../..
 CMakeFiles/ORB_SLAM2.dir/src/Viewer.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/flann/saving.h
 CMakeFiles/ORB_SLAM2.dir/src/Viewer.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/flann/timer.h
 CMakeFiles/ORB_SLAM2.dir/src/Viewer.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/highgui.hpp
+CMakeFiles/ORB_SLAM2.dir/src/Viewer.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/highgui/highgui.hpp
 CMakeFiles/ORB_SLAM2.dir/src/Viewer.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/highgui/highgui_c.h
 CMakeFiles/ORB_SLAM2.dir/src/Viewer.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/imgcodecs.hpp
 CMakeFiles/ORB_SLAM2.dir/src/Viewer.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/imgcodecs/imgcodecs_c.h

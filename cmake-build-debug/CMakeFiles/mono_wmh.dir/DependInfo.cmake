@@ -5,6 +5,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Monocular/mono_wmh.cc" "/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/CMakeFiles/mono_wmh.dir/Examples/Monocular/mono_wmh.cc.o"
+  "/home/wmh/work/ORB_SLAM2_wmh-ubuntu/src/QuadTree.cpp" "/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/CMakeFiles/mono_wmh.dir/src/QuadTree.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

@@ -19,6 +19,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/wmh/work/ORB_SLAM2_wmh-ubuntu/src/ORBmatcher.cc" "/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/CMakeFiles/ORB_SLAM2.dir/src/ORBmatcher.cc.o"
   "/home/wmh/work/ORB_SLAM2_wmh-ubuntu/src/Optimizer.cc" "/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/CMakeFiles/ORB_SLAM2.dir/src/Optimizer.cc.o"
   "/home/wmh/work/ORB_SLAM2_wmh-ubuntu/src/PnPsolver.cc" "/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/CMakeFiles/ORB_SLAM2.dir/src/PnPsolver.cc.o"
+  "/home/wmh/work/ORB_SLAM2_wmh-ubuntu/src/QuadTree.cpp" "/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/CMakeFiles/ORB_SLAM2.dir/src/QuadTree.cpp.o"
   "/home/wmh/work/ORB_SLAM2_wmh-ubuntu/src/Sim3Solver.cc" "/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/CMakeFiles/ORB_SLAM2.dir/src/Sim3Solver.cc.o"
   "/home/wmh/work/ORB_SLAM2_wmh-ubuntu/src/System.cc" "/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/CMakeFiles/ORB_SLAM2.dir/src/System.cc.o"
   "/home/wmh/work/ORB_SLAM2_wmh-ubuntu/src/Tracking.cc" "/home/wmh/work/ORB_SLAM2_wmh-ubuntu/cmake-build-debug/CMakeFiles/ORB_SLAM2.dir/src/Tracking.cc.o"

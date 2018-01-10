@@ -58,6 +58,7 @@ System::System(const string &strVocFile, const string &strSettingsFile, const eS
     }
 
     // For debug    by wmh
+    string a;
     TryKalmanFilter("aa.a");
     // -- debug
 

@@ -73,7 +73,7 @@ src/KeyFrameDatabase.cc
 src/Sim3Solver.cc
 src/Initializer.cc
 src/Viewer.cc
-)
+        src/QuadTree.cpp include/QuadTree.h)
 
 target_link_libraries(${PROJECT_NAME}
 ${OpenCV_LIBS}
@@ -109,7 +109,7 @@ Examples/Monocular/mono_tum.cc)
 target_link_libraries(mono_tum ${PROJECT_NAME})
 
 add_executable(mono_wmh
-Examples/Monocular/mono_wmh.cc)
+Examples/Monocular/mono_wmh.cc src/QuadTree.cpp include/QuadTree.h)
 target_link_libraries(mono_wmh ${PROJECT_NAME})
 
 add_executable(mono_kitti

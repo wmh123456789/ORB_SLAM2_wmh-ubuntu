@@ -4565,6 +4565,8 @@ CMakeFiles/ORB_SLAM2.dir/src/PnPsolver.cc.o: /usr/local/lib/cmake/Pangolin/../..
 CMakeFiles/ORB_SLAM2.dir/src/PnPsolver.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/xfeatures2d/cuda.hpp
 CMakeFiles/ORB_SLAM2.dir/src/PnPsolver.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/opencv2/xfeatures2d/nonfree.hpp
 
+CMakeFiles/ORB_SLAM2.dir/src/QuadTree.cpp.o: ../src/QuadTree.cpp
+
 CMakeFiles/ORB_SLAM2.dir/src/Sim3Solver.cc.o: ../Thirdparty/DBoW2/DBoW2/BowVector.h
 CMakeFiles/ORB_SLAM2.dir/src/Sim3Solver.cc.o: ../Thirdparty/DBoW2/DBoW2/FORB.h
 CMakeFiles/ORB_SLAM2.dir/src/Sim3Solver.cc.o: ../Thirdparty/DBoW2/DBoW2/FeatureVector.h

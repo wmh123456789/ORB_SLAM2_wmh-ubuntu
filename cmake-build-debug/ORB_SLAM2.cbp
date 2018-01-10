@@ -539,6 +539,10 @@
 		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Stereo/stereo_kitti.cc">
 			<Option target="stereo_kitti"/>
 		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/include/QuadTree.h">
+			<Option target="mono_wmh"/>
+			<Option target="ORB_SLAM2"/>
+		</Unit>
 		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/src/Converter.cc">
 			<Option target="ORB_SLAM2"/>
 		</Unit>
@@ -582,6 +586,10 @@
 			<Option target="ORB_SLAM2"/>
 		</Unit>
 		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/src/PnPsolver.cc">
+			<Option target="ORB_SLAM2"/>
+		</Unit>
+		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/src/QuadTree.cpp">
+			<Option target="mono_wmh"/>
 			<Option target="ORB_SLAM2"/>
 		</Unit>
 		<Unit filename="/home/wmh/work/ORB_SLAM2_wmh-ubuntu/src/Sim3Solver.cc">

@@ -808,6 +808,36 @@ src/PnPsolver.cc.s:
 	$(MAKE) -f CMakeFiles/ORB_SLAM2.dir/build.make CMakeFiles/ORB_SLAM2.dir/src/PnPsolver.cc.s
 .PHONY : src/PnPsolver.cc.s
 
+src/QuadTree.o: src/QuadTree.cpp.o
+
+.PHONY : src/QuadTree.o
+
+# target to build an object file
+src/QuadTree.cpp.o:
+	$(MAKE) -f CMakeFiles/mono_wmh.dir/build.make CMakeFiles/mono_wmh.dir/src/QuadTree.cpp.o
+	$(MAKE) -f CMakeFiles/ORB_SLAM2.dir/build.make CMakeFiles/ORB_SLAM2.dir/src/QuadTree.cpp.o
+.PHONY : src/QuadTree.cpp.o
+
+src/QuadTree.i: src/QuadTree.cpp.i
+
+.PHONY : src/QuadTree.i
+
+# target to preprocess a source file
+src/QuadTree.cpp.i:
+	$(MAKE) -f CMakeFiles/mono_wmh.dir/build.make CMakeFiles/mono_wmh.dir/src/QuadTree.cpp.i
+	$(MAKE) -f CMakeFiles/ORB_SLAM2.dir/build.make CMakeFiles/ORB_SLAM2.dir/src/QuadTree.cpp.i
+.PHONY : src/QuadTree.cpp.i
+
+src/QuadTree.s: src/QuadTree.cpp.s
+
+.PHONY : src/QuadTree.s
+
+# target to generate assembly for a file
+src/QuadTree.cpp.s:
+	$(MAKE) -f CMakeFiles/mono_wmh.dir/build.make CMakeFiles/mono_wmh.dir/src/QuadTree.cpp.s
+	$(MAKE) -f CMakeFiles/ORB_SLAM2.dir/build.make CMakeFiles/ORB_SLAM2.dir/src/QuadTree.cpp.s
+.PHONY : src/QuadTree.cpp.s
+
 src/Sim3Solver.o: src/Sim3Solver.cc.o
 
 .PHONY : src/Sim3Solver.o
@@ -998,6 +1028,9 @@ help:
 	@echo "... src/PnPsolver.o"
 	@echo "... src/PnPsolver.i"
 	@echo "... src/PnPsolver.s"
+	@echo "... src/QuadTree.o"
+	@echo "... src/QuadTree.i"
+	@echo "... src/QuadTree.s"
 	@echo "... src/Sim3Solver.o"
 	@echo "... src/Sim3Solver.i"
 	@echo "... src/Sim3Solver.s"

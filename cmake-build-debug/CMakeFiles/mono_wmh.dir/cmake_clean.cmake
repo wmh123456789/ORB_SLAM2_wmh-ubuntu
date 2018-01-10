@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/mono_wmh.dir/Examples/Monocular/mono_wmh.cc.o"
+  "CMakeFiles/mono_wmh.dir/src/QuadTree.cpp.o"
   "../Examples/Monocular/mono_wmh.pdb"
   "../Examples/Monocular/mono_wmh"
 )

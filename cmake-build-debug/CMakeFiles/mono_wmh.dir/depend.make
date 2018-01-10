@@ -440,3 +440,5 @@ CMakeFiles/mono_wmh.dir/Examples/Monocular/mono_wmh.cc.o: /usr/local/lib/cmake/P
 CMakeFiles/mono_wmh.dir/Examples/Monocular/mono_wmh.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/pangolin/video/video_output.h
 CMakeFiles/mono_wmh.dir/Examples/Monocular/mono_wmh.cc.o: /usr/local/lib/cmake/Pangolin/../../../include/pangolin/video/video_output_interface.h
 
+CMakeFiles/mono_wmh.dir/src/QuadTree.cpp.o: ../src/QuadTree.cpp
+

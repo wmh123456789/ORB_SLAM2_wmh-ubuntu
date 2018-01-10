@@ -5,6 +5,7 @@
 using namespace std;
 
 int main() {
+    int a = 0x00;
     std::cout << "Hello, World!" << std::endl;
 
     WMH::QuadTree QT;

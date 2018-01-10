@@ -4,7 +4,7 @@
 
 #include "QuadTree.h"
 #include <iostream>
-#include <list>
+
 
 namespace WMH
 {
@@ -12,7 +12,7 @@ namespace WMH
 
 QTNode::QTNode(int depth, float size, Point3f center, QTNode* parent, QTContent* content)
 {
-
+    return ;
 
 
 }

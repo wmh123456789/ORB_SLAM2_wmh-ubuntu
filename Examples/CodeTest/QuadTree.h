@@ -10,6 +10,7 @@
 #include <iostream>
 #include <string>
 #include <unistd.h>
+#include <vector>
 using namespace std;
 
 
@@ -29,17 +30,20 @@ typedef struct QTContent{
 
 class QTNode{
 public:
-    QTNode();
+    QTNode(int depth, float size, Point3f center, QTNode* parent, QTContent* content);
     bool isPointIn(Point3f* Pt);
 private:
     float minX,maxX,minY,maxY;
-    int NodeId;
+    int NodeId;  // DL:00 -> 0x0 DR:01->0x1 UL:10->0x2 UR:11->0x3
     Point3f* center;
     float size;
     int depth;
-    QTNode Children[4];
+    QTNode* Children[4];
     QTContent content;
-    QTNode* LeftNb,RightNb,UpperNb,LowerNb;
+    QTNode* LeftNb;
+    QTNode* RightNb;
+    QTNode* UpperNb;
+    QTNode* LowerNb;
     QTNode* NextChild;
 
 }; // class QTNode
@@ -53,6 +57,7 @@ private:
 //  | 00 | 01 |
 //  +----+----|  --> x
 // x+ : right; y+ : down; z+ : front;
+// 00 -> 0x0 01->0x1 10->0x2 11->0x3
 
     class QuadTree {
 public:
@@ -62,7 +67,8 @@ public:
 public:
     QuadTree();
     QTNode* SearchNeighbor();
-    int QueryPt();
+    QTNode* QueryNodeById(int NodeId);
+    QTNode* QueryPt();
 
     void SayHello(const string &someting);
 

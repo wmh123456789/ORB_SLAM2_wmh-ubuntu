@@ -23,43 +23,64 @@ typedef struct Point3f{
     float z;
 }Point3f;
 
+enum NodePos{
+    DL = 0,
+    DR = 1,
+    UL = 2,
+    UR = 3
+};
+
+enum NeighborOrientation{
+    nLEFT  = 0,
+    nRIGHT = 1,
+    nUPPER = 2,
+    nLOWER = 3
+};
+
 typedef struct QTContent{
     int MapPtN;
     std::vector<Point3f*> MapPts;
 }QTContent;
 
+class QuadTree;
 class QTNode{
 public:
-    QTNode(int depth, float size, Point3f center, QTNode* parent, QTContent* content);
+    QTNode(int depth, float size, Point3f* center, QTNode* parent, QTContent* content);
     bool isPointIn(Point3f* Pt);
+    vector<QTNode*> QueryNeighborNode(NeighborOrientation Orientation);
+    int InitChildren(QTContent* content);
+
+
 private:
-    float minX,maxX,minY,maxY;
-    int NodeId;  // DL:00 -> 0x0 DR:01->0x1 UL:10->0x2 UR:11->0x3
-    Point3f* center;
-    float size;
-    int depth;
-    QTNode* Children[4];
-    QTContent content;
-    QTNode* LeftNb;
-    QTNode* RightNb;
-    QTNode* UpperNb;
-    QTNode* LowerNb;
-    QTNode* NextChild;
+    float mMinX,mMaxX,mMinY,mMaxY,mMinZ,mMaxZ;
+    int mNodeId;  // For each layer DL:00 -> 0x0 DR:01->0x1 UL:10->0x2 UR:11->0x3
+    Point3f* mCenter;
+    float mSize;
+    int mDepth,mMaxDepth;
+    QuadTree* mTree;
+    QTNode* mParent;
+    QTNode* mChildren[4]; // 00 -> 0x0 01->0x1 10->0x2 11->0x3
+    QTContent* mContent;
+    QTNode* mLeftNb;
+    QTNode* mRightNb;
+    QTNode* mUpperNb;
+    QTNode* mLowerNb;
+    QTNode* mNextChild;
 
 }; // class QTNode
 
 //the Corrdinate is same with cozmo's cam
-//  z
-//  ^
-//  +----+----+
-//  | 10 | 11 |
-//  +----+----+
-//  | 00 | 01 |
-//  +----+----|  --> x
+//  z                       z
+//  ^                       ^
+//  +----+----+             +----+----+
+//  | 10 | 11 |             | 2  | 3  |
+//  +----+----+             +----+----+
+//  | 00 | 01 |             | 0  | 1  |
+//  +----+----|  --> x      +----+----|  --> x
 // x+ : right; y+ : down; z+ : front;
 // 00 -> 0x0 01->0x1 10->0x2 11->0x3
 
-    class QuadTree {
+class QuadTree {
 public:
    QTNode* RootNode;
 

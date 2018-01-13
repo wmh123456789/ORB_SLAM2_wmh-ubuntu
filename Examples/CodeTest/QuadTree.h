@@ -41,7 +41,7 @@ enum NeighborOrientation{
 
 typedef struct QTContent{
     unsigned long MapPtN = 0;
-    std::vector<Point3f*> MapPts;
+    std::vector<Point3f*> MapPts;  //TODO: Need to initialize.
 }QTContent;
 
 class QuadTree;
@@ -49,7 +49,9 @@ class QTNode{
 public:
     QTNode(int depth, float size, Point3f center, QTNode* parent);
 
-    void setContent(const QTContent &mContent);
+    virtual ~QTNode();
+
+    void setContent(const QTContent *content);
     const QTContent &getContent() const;
 
     void setCenter(const Point3f &mCenter);
@@ -62,6 +64,7 @@ public:
     void QueryNeighborNode(NeighborOrientation Orientation, QTNode* Node);
     int InitChildren(QTContent* content);
     void PrintNodeInfo(QTNode* node);
+    void PrintNodeContent();
 
 
 
@@ -110,7 +113,7 @@ public:
     void PrintRootNode();
 
     void SayHello(const string &someting);
-    QTContent FillContentWithMapPoints(vector<Point3f*> MapPoints);
+    QTContent* FillContentWithMapPoints(vector<Point3f*> MapPoints);
 
 private:
     QTNode* RootNode;

@@ -26,17 +26,16 @@ int main() {
                        {25.1,-4.4}};
 
 
-    for( int i = 0; i<0; i++){
-        Point3f pt;
-        pt.x = xz[i][0];
-        pt.y = 0.0;
-        pt.z = xz[i][1];
-        Points.insert(Points.end(),&pt);
+    for( int i = 0; i<10; i++){
+        Point3f* pt = new Point3f;
+        pt->x = xz[i][0];
+        pt->y = 0.0;
+        pt->z = xz[i][1];
+        Points.insert(Points.end(),pt);
     }
 
     WMH::QuadTree QT2 = QuadTree(32.0,6,Points);
     QT2.PrintRootNode();
-
 
 
     return 0;

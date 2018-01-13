@@ -71,7 +71,7 @@ namespace WMH {
         center.x = mCenter.x - mSize / 4;
         center.z = mCenter.z - mSize / 4;
         mChildren[DL].setCenter(center); //TODO
-        mChildren[DL].setContent(ContDL);
+        mChildren[DL].setContent(&ContDL);
 //
 //        center.x = mCenter.x + mSize/4;
 //        center.z = mCenter.z - mSize/4;
@@ -100,11 +100,27 @@ namespace WMH {
         cout << "X: From " << node->mMinX << " to " << mMaxX << endl;
         cout << "Z: From " << node->mMinZ << " to " << mMaxZ << endl;
         cout << "NodeID:" << node->getNodeId() << endl;
-
     }
 
-    void QTNode::setContent(const QTContent &mContent) {
-        QTNode::mContent = mContent;
+    void QTNode::PrintNodeContent() {
+        if (mContent.MapPtN == 0){
+            cout << "Noting is found." << endl;
+        }
+        else{
+            cout << mContent.MapPtN << " points are found:" << endl;
+            for (int pi=0;pi < mContent.MapPtN;pi++){
+                cout << "No." << pi << ": ";
+                cout << "x=" << mContent.MapPts[pi]->x << ", ";
+                cout << "z=" << mContent.MapPts[pi]->z << ";" << endl;
+            }
+        }
+    }
+
+
+
+
+    void QTNode::setContent(const QTContent* content) {
+        QTNode::mContent = *content;
     }
 
     const QTContent &QTNode::getContent() const {
@@ -127,6 +143,10 @@ namespace WMH {
         return mNodeId;
     }
 
+    QTNode::~QTNode() {
+        //TODO  delete content with all points
+    }
+
 
     QuadTree::QuadTree(float size, int MaxDepth, vector<Point3f *> MapPoints) {
 
@@ -135,16 +155,18 @@ namespace WMH {
         center.y = 0.0;
         center.z = 0.0;
 
-        QTContent content = FillContentWithMapPoints(MapPoints);
+        QTContent* content = FillContentWithMapPoints(MapPoints);
         RootNode = new QTNode(MaxDepth, size, center, NULL);
         RootNode->setNodeId(-1);
+        RootNode->setContent(content);
+        delete content; //TODO: need to confirm
     }
 
-    QTContent QuadTree::FillContentWithMapPoints(vector<Point3f *> MapPoints) {
+    QTContent* QuadTree::FillContentWithMapPoints(vector<Point3f *> MapPoints) {
 
-        QTContent content;
-        content.MapPts = MapPoints;
-        content.MapPtN = MapPoints.size();
+        QTContent* content = new QTContent;
+        content->MapPts = MapPoints;
+        content->MapPtN = MapPoints.size();
 
         return content;
     }
@@ -152,6 +174,7 @@ namespace WMH {
 
     void QuadTree::PrintRootNode() {
         RootNode->PrintNodeInfo(RootNode);
+        RootNode->PrintNodeContent();
     }
 
     void QuadTree::SayHello(const string &something) {

@@ -100,11 +100,12 @@ public:
 
 
 public:
-    QuadTree();
-    QuadTree(int MaxDepth,vector<Point3f*> MapPoints);
+//    QuadTree();
+    QuadTree(float size, int MaxDepth,vector<Point3f*> MapPoints);
 
     QTNode* QueryNodeById(int NodeId);
     QTNode* QueryPt();
+    void PrintRootNode();
 
     void SayHello(const string &someting);
     QTContent FillContentWithMapPoints(vector<Point3f*> MapPoints);

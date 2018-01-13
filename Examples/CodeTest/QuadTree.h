@@ -48,8 +48,6 @@ class QuadTree;
 class QTNode{
 public:
     QTNode(int depth, float size, Point3f center, QTNode* parent);
-    void setNodeId(int id);
-    int  getNodeId();
 
     void setContent(const QTContent &mContent);
     const QTContent &getContent() const;
@@ -57,11 +55,13 @@ public:
     void setCenter(const Point3f &mCenter);
     const Point3f &getCenter() const;
 
+    void setNodeId(int mNodeId);
+    int getNodeId() const;
 
     bool isPointIn(Point3f Pt);
     void QueryNeighborNode(NeighborOrientation Orientation, QTNode* Node);
     int InitChildren(QTContent* content);
-    void PrintNodeInfo();
+    void PrintNodeInfo(QTNode* node);
 
 
 
@@ -102,6 +102,8 @@ public:
 public:
 //    QuadTree();
     QuadTree(float size, int MaxDepth,vector<Point3f*> MapPoints);
+
+    virtual ~QuadTree();
 
     QTNode* QueryNodeById(int NodeId);
     QTNode* QueryPt();

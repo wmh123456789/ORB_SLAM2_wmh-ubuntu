@@ -12,14 +12,8 @@ namespace WMH {
         mSize = size;
         mCenter = center;
         mParent = parent;
-//        mChildren = NULL;
-//        mChildren[DL] = NULL;
-//        mChildren[DR] = NULL;
-//        mChildren[UR] = NULL;
-//        mChildren[UL] = NULL;
-
+        isHasChild = false;
         setBoundray();
-
     }
 
     bool QTNode::isPointIn(Point3f Pt) {
@@ -42,68 +36,83 @@ namespace WMH {
     }
 
     int QTNode::InitChildren() {
-        Point3f Pt;
+        Point3f* Pt;
         Point3f center;
-        QTContent ContDL, ContDR, ContUL, ContUR;
+        int iCh = 0;
+        QTContent* ContDL = new QTContent;
+        QTContent* ContDR = new QTContent;
+        QTContent* ContUL = new QTContent;
+        QTContent* ContUR = new QTContent;
 
-        if (mContent.MapPtN < 1){
-            cout<< "No point is found in node, cannot initialize children.";
+
+        if (mContent.MapPtN <= MAPPOINTS_MAX){
+            cout<< "No enough points in node, initialization is stopped.";
             return 0;
         }
 
         // Loop over all points
         for (int i = 0; i < mContent.MapPts.size(); i++) {
-            Pt =  *mContent.MapPts[i];
+            Pt =  mContent.MapPts[i];
             // Allocate points into Quad-Area
-            if (isPointIn(Pt)) {
-                if (Pt.x < mCenter.x) {         // Left
-                    if (Pt.z < mCenter.z)       // Down
-                        ContDL.MapPts.insert(ContDL.MapPts.begin(), &Pt);
-                    else                       // Up
-                        ContUL.MapPts.insert(ContUL.MapPts.begin(), &Pt);
+            if (isPointIn(*Pt)) {
+                if (Pt->x < mCenter.x) {         // Left
+                    if (Pt->z < mCenter.z)       // Down
+                        ContDL->MapPts.insert(ContDL->MapPts.begin(), Pt);
+                    else                        // Up
+                        ContUL->MapPts.insert(ContUL->MapPts.begin(), Pt);
                 } else {                          // Right
-                    if (Pt.z < mCenter.z)       // DOWN
-                        ContDR.MapPts.insert(ContDR.MapPts.begin(), &Pt);
+                    if (Pt->z < mCenter.z)       // DOWN
+                        ContDR->MapPts.insert(ContDR->MapPts.begin(), Pt);
                     else                       // Up
-                        ContUR.MapPts.insert(ContUR.MapPts.begin(), &Pt);
+                        ContUR->MapPts.insert(ContUR->MapPts.begin(), Pt);
                 }
             }
         }
-        ContDL.MapPtN = ContDL.MapPts.size();
-        ContDR.MapPtN = ContDR.MapPts.size();
-        ContUL.MapPtN = ContUL.MapPts.size();
-        ContUR.MapPtN = ContUR.MapPts.size();
+        ContDL->MapPtN = ContDL->MapPts.size();
+        ContDR->MapPtN = ContDR->MapPts.size();
+        ContUL->MapPtN = ContUL->MapPts.size();
+        ContUR->MapPtN = ContUR->MapPts.size();
 
         // Calculate the sub-center and set content for children
         // TODO: Check depth before new children
-        mChildren.insert(mChildren.begin(), 4, QTNode(mDepth - 1, mSize / 2, mCenter, this));
-
+        for (iCh = 0; iCh < 4; iCh++){
+            QTNode* child = new QTNode(mDepth - 1, mSize / 2, mCenter, this);
+            mChildren.insert(mChildren.begin(),child);
+        }
 
         //TODO: Allocate: NodeId, Tree pointer, Neighbor for children
         center.y = mCenter.y;  // y is not changed in Cozmo.
         center.x = mCenter.x - mSize / 4;
         center.z = mCenter.z - mSize / 4;
-        mChildren[DL].setCenter(center);
-        mChildren[DL].setBoundray();
-        mChildren[DL].setContent(&ContDL);
+        mChildren[DL]->setCenter(center);
+//        mChildren[DL]->setBoundray();
+        mChildren[DL]->setContent(ContDL);
+
 
         center.x = mCenter.x + mSize/4;
         center.z = mCenter.z - mSize/4;
-        mChildren[DR].setCenter(center);
-        mChildren[DR].setBoundray();
-        mChildren[DR].setContent(&ContDR);
+        mChildren[DR]->setCenter(center);
+//        mChildren[DR]->setBoundray();
+        mChildren[DR]->setContent(ContDR);
 
         center.x = mCenter.x - mSize/4;
         center.z = mCenter.z + mSize/4;
-        mChildren[UL].setCenter(center);
-        mChildren[UL].setBoundray();
-        mChildren[UL].setContent(&ContUL);
+        mChildren[UL]->setCenter(center);
+//        mChildren[UL]->setBoundray();
+        mChildren[UL]->setContent(ContUL);
 
         center.x = mCenter.x + mSize/4;
         center.z = mCenter.z + mSize/4;
-        mChildren[UR].setCenter(center);
-        mChildren[UR].setBoundray();
-        mChildren[UR].setContent(&ContUR);
+        mChildren[UR]->setCenter(center);
+//        mChildren[UR]->setBoundray();
+        mChildren[UR]->setContent(ContUR);
+
+        isHasChild = true;
+
+        for(iCh = 0; iCh < 4; iCh++){
+            mChildren[iCh]->setBoundray();
+            mChildren[iCh]->InitChildren();
+        }
 
         return 1;
     }
@@ -132,8 +141,6 @@ namespace WMH {
             }
         }
     }
-
-
 
 
     void QTNode::setContent(const QTContent* content) {
@@ -173,6 +180,11 @@ namespace WMH {
         //TODO  delete content with all points
     }
 
+    void QTNode::PrintChilden(bool isRecursion) {
+        if (isHasChild)
+            cout <<
+    }
+
 
     QuadTree::QuadTree(float size, int MaxDepth, vector<Point3f *> MapPoints) {
 
@@ -187,6 +199,11 @@ namespace WMH {
         RootNode->setContent(content);
         RootNode->InitChildren();
         delete content; //TODO: need to confirm
+    }
+
+    QuadTree::~QuadTree() {
+        delete RootNode;
+
     }
 
     QTContent* QuadTree::FillContentWithMapPoints(vector<Point3f *> MapPoints) {
@@ -208,9 +225,9 @@ namespace WMH {
         cout << mpWord << something << endl;
     }
 
-    QuadTree::~QuadTree() {
-        delete RootNode;
 
+    void QuadTree::PrintTree() {
+        RootNode->PrintChilden(true); // Print children with recursion
     }
 
 }

@@ -68,6 +68,7 @@ public:
     int InitChildren();
     void PrintNodeInfo(QTNode* node);
     void PrintNodeContent();
+    void PrintChilden(bool isRecursion);
 
 
 
@@ -77,10 +78,12 @@ private:
     Point3f mCenter;
     float mSize;
     int mDepth,mMaxDepth;  // RootNode with MaxDepth, depth -1 for child
+    const int MAPPOINTS_MAX = 2; // Maximum capacity of map points
     QuadTree* mTree;
     QTNode* mParent;
 //    QTNode  mChildren[4]; // 00 -> 0x0 01->0x1 10->0x2 11->0x3
-    vector<QTNode> mChildren;
+    vector<QTNode*> mChildren;
+    bool isHasChild;
     QTContent mContent;
     QTNode* mLeftNb;
     QTNode* mRightNb;
@@ -114,6 +117,7 @@ public:
     QTNode* QueryNodeById(int NodeId);
     QTNode* QueryPt();
     void PrintRootNode();
+    void PrintTree();
 
     void SayHello(const string &someting);
     QTContent* FillContentWithMapPoints(vector<Point3f*> MapPoints);

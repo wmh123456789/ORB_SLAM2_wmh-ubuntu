@@ -35,6 +35,7 @@ int main() {
     }
 
     WMH::QuadTree QT2 = QuadTree(32.0,6,Points);
+
     QT2.PrintRootNode();
 
 

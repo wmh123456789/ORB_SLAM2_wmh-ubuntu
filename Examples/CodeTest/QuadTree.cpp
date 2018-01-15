@@ -18,31 +18,42 @@ namespace WMH {
 //        mChildren[UR] = NULL;
 //        mChildren[UL] = NULL;
 
-        mMaxX = center.x + size / 2;
-        mMinX = center.x - size / 2;
-        mMaxY = center.y;         // Don't use Y in cozmo
-        mMinY = center.y;         // Don't use Y in cozmo
-        mMaxZ = center.z + size / 2;
-        mMinZ = center.z - size / 2;
+        setBoundray();
 
     }
 
     bool QTNode::isPointIn(Point3f Pt) {
-        return 1;
+        int flag = 0;
+        if (Pt.x <= mMaxX && Pt.x >= mMinX)
+            flag++;
+        if (Pt.y <= mMaxY && Pt.y >= mMinY)
+            flag++;
+        if (Pt.z <= mMaxZ && Pt.z >= mMinZ)
+            flag++;
+
+        if (flag == 3)
+            return true;
+        else
+            return false;
     }
 
     void QTNode::QueryNeighborNode(NeighborOrientation Orientation, QTNode *Node) {
         return;
     }
 
-    int QTNode::InitChildren(QTContent *content) {
+    int QTNode::InitChildren() {
         Point3f Pt;
         Point3f center;
         QTContent ContDL, ContDR, ContUL, ContUR;
 
+        if (mContent.MapPtN < 1){
+            cout<< "No point is found in node, cannot initialize children.";
+            return 0;
+        }
+
         // Loop over all points
-        for (int i = 0; i < content->MapPts.size(); i++) {
-            Pt = *content->MapPts[i];
+        for (int i = 0; i < mContent.MapPts.size(); i++) {
+            Pt =  *mContent.MapPts[i];
             // Allocate points into Quad-Area
             if (isPointIn(Pt)) {
                 if (Pt.x < mCenter.x) {         // Left
@@ -51,7 +62,7 @@ namespace WMH {
                     else                       // Up
                         ContUL.MapPts.insert(ContUL.MapPts.begin(), &Pt);
                 } else {                          // Right
-                    if (Pt.z > mCenter.z)       // Down
+                    if (Pt.z < mCenter.z)       // DOWN
                         ContDR.MapPts.insert(ContDR.MapPts.begin(), &Pt);
                     else                       // Up
                         ContUR.MapPts.insert(ContUR.MapPts.begin(), &Pt);
@@ -67,28 +78,34 @@ namespace WMH {
         // TODO: Check depth before new children
         mChildren.insert(mChildren.begin(), 4, QTNode(mDepth - 1, mSize / 2, mCenter, this));
 
+
+        //TODO: Allocate: NodeId, Tree pointer, Neighbor for children
         center.y = mCenter.y;  // y is not changed in Cozmo.
         center.x = mCenter.x - mSize / 4;
         center.z = mCenter.z - mSize / 4;
-        mChildren[DL].setCenter(center); //TODO
+        mChildren[DL].setCenter(center);
+        mChildren[DL].setBoundray();
         mChildren[DL].setContent(&ContDL);
-//
-//        center.x = mCenter.x + mSize/4;
-//        center.z = mCenter.z - mSize/4;
-//        mChildren[DR] = QTNode(mDepth-1,mSize/2,center,this);
-//        mChildren[DR].setContent(ContDR);
-//
-//        center.x = mCenter.x - mSize/4;
-//        center.z = mCenter.z + mSize/4;
-//        mChildren[UL] = QTNode(mDepth-1,mSize/2,center,this);
-//        mChildren[UL].setContent(ContUL);
-//
-//        center.x = mCenter.x + mSize/4;
-//        center.z = mCenter.z + mSize/4;
-//        mChildren[UR] = QTNode(mDepth-1,mSize/2,center,this);
-//        mChildren[UR].setContent(ContUR);
 
-        return 0;
+        center.x = mCenter.x + mSize/4;
+        center.z = mCenter.z - mSize/4;
+        mChildren[DR].setCenter(center);
+        mChildren[DR].setBoundray();
+        mChildren[DR].setContent(&ContDR);
+
+        center.x = mCenter.x - mSize/4;
+        center.z = mCenter.z + mSize/4;
+        mChildren[UL].setCenter(center);
+        mChildren[UL].setBoundray();
+        mChildren[UL].setContent(&ContUL);
+
+        center.x = mCenter.x + mSize/4;
+        center.z = mCenter.z + mSize/4;
+        mChildren[UR].setCenter(center);
+        mChildren[UR].setBoundray();
+        mChildren[UR].setContent(&ContUR);
+
+        return 1;
     }
 
     void QTNode::PrintNodeInfo(QTNode* node) {
@@ -135,6 +152,15 @@ namespace WMH {
         return mCenter;
     }
 
+    void QTNode::setBoundray() {
+        mMaxX = mCenter.x + mSize / 2;
+        mMinX = mCenter.x - mSize / 2;
+        mMaxY = mCenter.y;         // Don't use Y in cozmo
+        mMinY = mCenter.y;         // Don't use Y in cozmo
+        mMaxZ = mCenter.z + mSize / 2;
+        mMinZ = mCenter.z - mSize / 2;
+    }
+
     void QTNode::setNodeId(int mNodeId) {
         QTNode::mNodeId = mNodeId;
     }
@@ -159,6 +185,7 @@ namespace WMH {
         RootNode = new QTNode(MaxDepth, size, center, NULL);
         RootNode->setNodeId(-1);
         RootNode->setContent(content);
+        RootNode->InitChildren();
         delete content; //TODO: need to confirm
     }
 

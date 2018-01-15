@@ -57,12 +57,15 @@ public:
     void setCenter(const Point3f &mCenter);
     const Point3f &getCenter() const;
 
+    void setBoundray();
+
+
     void setNodeId(int mNodeId);
     int getNodeId() const;
 
     bool isPointIn(Point3f Pt);
     void QueryNeighborNode(NeighborOrientation Orientation, QTNode* Node);
-    int InitChildren(QTContent* content);
+    int InitChildren();
     void PrintNodeInfo(QTNode* node);
     void PrintNodeContent();
 

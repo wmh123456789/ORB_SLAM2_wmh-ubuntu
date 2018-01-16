@@ -33,16 +33,23 @@ enum NodePos{
 };
 
 enum NeighborOrientation{
-    nLEFT  = 0,
+    nLEFT  = -1,
     nRIGHT = 1,
     nUPPER = 2,
-    nLOWER = 3
+    nLOWER = -2
 };
 
 typedef struct QTContent{
     unsigned long MapPtN = 0;
     std::vector<Point3f*> MapPts;  //TODO: Need to initialize.
 }QTContent;
+
+// ID operation tools
+// Only for Quadtree with oct-id
+vector<int> ID2Vector(int id, bool isStartWithMSB);
+vector<int> ID2Vector(int id);
+int Vector2ID(vector<int> numbers);      //ONLY for MSB-first vector
+int IDCalculater(int id, NeighborOrientation orientatio);
 
 class QuadTree;
 class QTNode{
@@ -63,8 +70,10 @@ public:
     void setNodeId(int NodeId);
     int  getNodeId();
 
+
     bool isPointIn(Point3f Pt);
-    void QueryNeighborNode(NeighborOrientation Orientation, QTNode* Node);
+    QTNode* QueryNodeById(int NodeId);
+    QTNode* QueryNeighborNode(NeighborOrientation Orientation);
     int InitChildren();
     void PrintNodeInfo(QTNode* node);
     void PrintNodeContent();
@@ -74,7 +83,7 @@ public:
 
 private:
     float mMinX,mMaxX,mMinY,mMaxY,mMinZ,mMaxZ;
-    int mNodeId = 6;  // For each layer DL:00 -> 0x0 DR:01->0x1 UL:10->0x2 UR:11->0x3
+    int mNodeId = 06;  // For each layer DL:00 -> 0x0 DR:01->0x1 UL:10->0x2 UR:11->0x3
     Point3f mCenter;
     float mSize;
     int mDepth;  // RootNode with MaxDepth, depth -1 for child
@@ -114,8 +123,8 @@ public:
 
     virtual ~QuadTree();
 
-    int getMMaxDepth() const;
-
+    int getMaxDepth();
+    QTNode* getRootNode();
     QTNode* QueryNodeById(int NodeId);
     QTNode* QueryPt();
     void PrintRootNode();
@@ -125,7 +134,7 @@ public:
     QTContent* FillContentWithMapPoints(vector<Point3f*> MapPoints);
 
 private:
-    QTNode* RootNode;
+    QTNode* mRootNode;
     string mpWord;
     int mMaxDepth;
 

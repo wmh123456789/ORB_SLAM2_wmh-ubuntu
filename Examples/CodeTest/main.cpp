@@ -6,8 +6,16 @@ using namespace std;
 using namespace WMH;
 
 int main() {
-    int a = 0x00;
-    std::cout << "Hello, World!" << std::endl;
+    int i=0;
+//    int a = 03020;
+//    int x = 0;
+//    cout<< oct <<a <<endl;
+//    while(a>0){
+//        cout<<a%8<<endl;
+//        a = a/8;
+//    }
+
+//    std::cout << "Hello, World!" << std::endl;
 //
 //    WMH::QuadTree QT;
 //    QT.SayHello("You are handsome boy");
@@ -24,7 +32,7 @@ int main() {
 //                       {9.0,30.1},      // out
 //                       {-15.3,2.3},     // UL
 //                       {25.1,-4.4}};    // out
-    float xz[10][2] = {{1.0,1.0},       // UR
+    float xz[11][2] = {{1.0,1.0},       // UR
                        {6.0,5.0},       // UR
                        {4.0,11.0},      // UR
                        {12.1,4.3},      // UR
@@ -33,9 +41,10 @@ int main() {
                        {-2.0,-2.3},     // DL
                        {-12.0,-4.1},    // DL
                        {4.3,-4.3},      // DR
-                       {12.1,-5.4}};    // DR
+                       {12.1,-5.4},
+                       {5.1,2.3} };    // DR
 
-    for( int i = 0; i<10; i++){
+    for( i = 0; i<11; i++){
         Point3f* pt = new Point3f;
         pt->x = xz[i][0];
         pt->y = 0.0;
@@ -45,8 +54,18 @@ int main() {
 
     WMH::QuadTree QT2 = QuadTree(32.0,6,Points);
 
-    QT2.PrintRootNode();
+//    QT2.PrintRootNode();
     QT2.PrintTree();
+
+    int id = 0123456;
+    cout<< id <<endl;
+    vector<int> nums = ID2Vector(id);
+    for(i=0;i<nums.size();i++)
+        cout << nums[i]<< endl;
+
+    cout << "Inverse: " << Vector2ID(nums)<< endl;
+
+    cout << "Calc neighbor ID:" << IDCalculater(013,nRIGHT)<<endl;
 
     return 0;
 };

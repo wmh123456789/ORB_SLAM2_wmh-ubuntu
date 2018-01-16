@@ -7,6 +7,67 @@
 
 
 namespace WMH {
+    // Turn the Oct id into vector
+    // StartWithMSB: 0abcd -> {a,b,c,d}
+    // StartWithLSB: 0abcd -> {d,c,b,a}
+    vector<int> ID2Vector(int id, bool isStartWithMSB){
+        vector<int> numbers;
+        while(id > 0){
+            if(isStartWithMSB)
+                numbers.insert(numbers.begin(),id%8);
+            else
+                numbers.insert(numbers.end(),id%8);
+            id = id/8;
+        }
+        return numbers;
+    }
+
+    vector<int> ID2Vector(int id) {
+        return ID2Vector(id,true);
+    }
+
+    //ONLY for MSB-first vector
+    int Vector2ID(vector<int> numbers){
+        int id = 00;
+        for(int i = 0; i < numbers.size(); i++){
+            id = id*8 + numbers[i];
+        }
+        return id;
+    }
+
+    // toLeft: -1, toRight: +1, toLower: -2, toUpper: +2
+    int IDCalculater(int id, NeighborOrientation orientation){
+        int target = 06;
+        int LSB = id%8;
+        vector<int> HighBits;
+
+        if (id + orientation < 0 || id + orientation > 3 || id*orientation == 1 || id*orientation == -2){
+            cout << "Neighbor is out of the tree" << endl;
+            return -999;
+        }
+
+        // TODO: simplify the if condition
+        if (abs(orientation)==2){       // ToLower or ToUpper
+            if (LSB + orientation < 0 || LSB + orientation > 3)
+                target = IDCalculater(id/8,orientation)*8 + LSB - orientation;
+            else
+                target = id + orientation;
+        }
+        else if(abs(orientation)==1){    // ToLeft or ToRight
+            // 1+1, 2-1,0-1,3+1
+            if (LSB + orientation < 0 || LSB + orientation > 3 || LSB*orientation == 1 || LSB*orientation == -2){
+                target = IDCalculater(id/8,orientation)*8 + LSB - orientation;
+            } else{
+                target = id + orientation;
+            }
+        }
+        else{
+            cout << "Invalid Operation for query neighbor. only +-1 or -+2 is acceptable."<< endl;
+            return id;
+        }
+        return target;
+    }
+
     QTNode::QTNode(int depth, float size, Point3f center, QTNode* parent, QuadTree* Tree) {
         mDepth = depth;
         mSize = size;
@@ -15,6 +76,10 @@ namespace WMH {
         mTree = Tree;
         isHasChild = false;
         setBoundray();
+    }
+
+    QTNode::~QTNode() {
+        //TODO  delete content with all points
     }
 
     bool QTNode::isPointIn(Point3f Pt) {
@@ -32,8 +97,68 @@ namespace WMH {
             return false;
     }
 
-    void QTNode::QueryNeighborNode(NeighborOrientation Orientation, QTNode *Node) {
-        return;
+    QTNode* QTNode::QueryNeighborNode(NeighborOrientation Orientation) {
+        if (mNodeId == 05){
+            cout << "Cannot query neighbor for root node." << endl;
+            return nullptr;
+        }
+        int PosInParent = mNodeId%8;
+        QTNode* node;
+        int FoundNeighbor = 0;
+        int i_num = 0;  // bit pos of ID
+        int NeighborId = 06;
+        vector<int> num = ID2Vector(mNodeId,false); // start with LSB
+
+        NeighborId = IDCalculater(mNodeId,Orientation);
+//        while (FoundNeighbor == 0 ){
+//            // toLeft: -1, toRight: +1, toLower: -2, toUpper: +2
+//
+//            switch (Orientation){
+//                case nLEFT:{
+//                    NeighborId = IDCalculater(mNodeId,-1);
+//                    break;
+//                }
+//                case nRIGHT:{
+//                    NeighborId = IDCalculater(mNodeId,-1);
+//                    break;
+//                }
+//                case nUPPER:{
+//                    break;
+//                }
+//                case nLOWER:{
+//                    break;
+//                }
+//
+//            }// switch
+//        }
+
+
+
+//        switch(Orientation){
+//            case nLEFT:         // search left neighbor
+//                switch(PosInParent){
+//                    case 00:    // for left-child
+//                    case 02:{
+//                        node = mParent->QueryNeighborNode(nLEFT);
+//                        if (node!= nullptr)
+//                            node = node->mChildren[PosInParent+1];
+//                        else
+//                            return nullptr;
+//                        break;
+//                    }
+//                    case 01:    // for right-child
+//                    case 03:{
+//                        node = mParent->mChildren[PosInParent-1];
+//                    }
+//                    default:
+//                        return nullptr;
+//
+//
+//                }
+//
+//
+//        }
+//        return nullptr;
     }
 
     int QTNode::InitChildren() {
@@ -124,6 +249,7 @@ namespace WMH {
         return 1;
     }
 
+
     void QTNode::PrintNodeInfo(QTNode* node) {
         int id = node->getNodeId();
         cout << "NodeID:" << id << endl;
@@ -134,6 +260,30 @@ namespace WMH {
         cout << "Z: From " << node->mMinZ << " to " << mMaxZ << endl;
         cout << "NodeID:" << node->getNodeId() << endl;
     }
+
+
+
+    QTNode* QTNode::QueryNodeById(int NodeId) {
+        vector<int> IDs;
+        QTNode* ptr = mTree->getRootNode();
+//        cout<< "Access:" <<oct <<NodeId << endl;
+
+//        while (NodeId > 0){
+//            IDs.insert(IDs.begin(),NodeId%8);
+//            NodeId = NodeId/8;
+//        }
+        IDs = ID2Vector(NodeId);
+
+        for(int i=0; i < IDs.size();i++){
+            if (!ptr->isHasChild){
+                cout << "Node" << NodeId << "is not exit."<< endl;
+                return nullptr;
+            }
+            ptr = ptr->mChildren[IDs[i]];
+        }
+        return ptr;
+    }
+
 
     void QTNode::PrintNodeContent() {
         if (mContent.MapPtN == 0){
@@ -183,15 +333,13 @@ namespace WMH {
         return mNodeId;
     }
 
-    QTNode::~QTNode() {
-        //TODO  delete content with all points
-    }
+
 
     void QTNode::PrintChildren(bool isRecursion) {
         cout << "Find " << mContent.MapPtN  << " points;"<<endl;
         if (isHasChild){
             for(int iCh = 0; iCh < 4; iCh++) {
-                for (int iLv = mDepth; iLv < mTree -> getMMaxDepth(); iLv++)
+                for (int iLv = mDepth; iLv < mTree -> getMaxDepth(); iLv++)
                     cout<< "   ";
                 cout << "|-in node "<< oct << mChildren[iCh]->mNodeId << ": ";
                 if (isRecursion){
@@ -215,18 +363,22 @@ namespace WMH {
         center.z = 0.0;
 
         QTContent* content = FillContentWithMapPoints(MapPoints);
-        RootNode = new QTNode(mMaxDepth, size, center, NULL, this);
-        RootNode->setNodeId(05);
-        RootNode->setContent(content);
-        RootNode->InitChildren();
+        mRootNode = new QTNode(mMaxDepth, size, center, NULL, this);
+        mRootNode->setNodeId(05);
+        mRootNode->setContent(content);
+        mRootNode->InitChildren();
         delete content; //TODO: need to confirm
 
 
     }
 
     QuadTree::~QuadTree() {
-        delete RootNode;
+        delete mRootNode;
 
+    }
+
+    QTNode *QuadTree::getRootNode() {
+        return mRootNode;
     }
 
     QTContent* QuadTree::FillContentWithMapPoints(vector<Point3f *> MapPoints) {
@@ -238,10 +390,15 @@ namespace WMH {
         return content;
     }
 
+    QTNode* QuadTree::QueryNodeById(int NodeId) {
+        return mRootNode->QueryNodeById(NodeId);
+    }
+
 
     void QuadTree::PrintRootNode() {
-        RootNode->PrintNodeInfo(RootNode);
-        RootNode->PrintNodeContent();
+        mRootNode->PrintNodeInfo(mRootNode);
+        mRootNode->PrintNodeContent();
+
     }
 
     void QuadTree::SayHello(const string &something) {
@@ -250,10 +407,13 @@ namespace WMH {
 
 
     void QuadTree::PrintTree() {
-        RootNode->PrintChildren(true); // Print children with recursion
+        mRootNode->PrintChildren(true); // Print children with recursion
+
+//        QTNode* node = mRootNode->QueryNodeById(0303);
+//        cout << "Get node:" << node->getNodeId() << endl;
     }
 
-    int QuadTree::getMMaxDepth() const {
+    int QuadTree::getMaxDepth() {
         return mMaxDepth;
     }
 

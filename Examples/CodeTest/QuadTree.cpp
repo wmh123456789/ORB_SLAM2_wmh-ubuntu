@@ -7,11 +7,12 @@
 
 
 namespace WMH {
-    QTNode::QTNode(int depth, float size, Point3f center, QTNode *parent) {
+    QTNode::QTNode(int depth, float size, Point3f center, QTNode* parent, QuadTree* Tree) {
         mDepth = depth;
         mSize = size;
         mCenter = center;
         mParent = parent;
+        mTree = Tree;
         isHasChild = false;
         setBoundray();
     }
@@ -36,19 +37,18 @@ namespace WMH {
     }
 
     int QTNode::InitChildren() {
+        if (mContent.MapPtN <= MAPPOINTS_MAX){
+//            cout<< "No enough points in node, initialization is stopped.";
+            return 0;
+        }
+
         Point3f* Pt;
         Point3f center;
-        int iCh = 0;
+        int iCh = 00;  // oct index
         QTContent* ContDL = new QTContent;
         QTContent* ContDR = new QTContent;
         QTContent* ContUL = new QTContent;
         QTContent* ContUR = new QTContent;
-
-
-        if (mContent.MapPtN <= MAPPOINTS_MAX){
-            cout<< "No enough points in node, initialization is stopped.";
-            return 0;
-        }
 
         // Loop over all points
         for (int i = 0; i < mContent.MapPts.size(); i++) {
@@ -75,8 +75,10 @@ namespace WMH {
 
         // Calculate the sub-center and set content for children
         // TODO: Check depth before new children
+        QTNode* child;
         for (iCh = 0; iCh < 4; iCh++){
-            QTNode* child = new QTNode(mDepth - 1, mSize / 2, mCenter, this);
+            child = new QTNode(mDepth - 1, mSize / 2, mCenter, this, mTree);
+            child->setNodeId(07);
             mChildren.insert(mChildren.begin(),child);
         }
 
@@ -85,33 +87,38 @@ namespace WMH {
         center.x = mCenter.x - mSize / 4;
         center.z = mCenter.z - mSize / 4;
         mChildren[DL]->setCenter(center);
-//        mChildren[DL]->setBoundray();
         mChildren[DL]->setContent(ContDL);
 
 
         center.x = mCenter.x + mSize/4;
         center.z = mCenter.z - mSize/4;
         mChildren[DR]->setCenter(center);
-//        mChildren[DR]->setBoundray();
         mChildren[DR]->setContent(ContDR);
 
         center.x = mCenter.x - mSize/4;
         center.z = mCenter.z + mSize/4;
         mChildren[UL]->setCenter(center);
-//        mChildren[UL]->setBoundray();
         mChildren[UL]->setContent(ContUL);
 
         center.x = mCenter.x + mSize/4;
         center.z = mCenter.z + mSize/4;
         mChildren[UR]->setCenter(center);
-//        mChildren[UR]->setBoundray();
         mChildren[UR]->setContent(ContUR);
 
         isHasChild = true;
 
         for(iCh = 0; iCh < 4; iCh++){
             mChildren[iCh]->setBoundray();
+            // Set OCT id
+            // in each level: 00~03: DL,DR,UL,UR
+            // 05: Root of the tree, 06: default
+            if (mNodeId == 05)    // if the root node
+                mChildren[iCh]->setNodeId(iCh);
+            else
+                mChildren[iCh]->setNodeId(iCh + mNodeId*8);
+            // Init the Children in next level.
             mChildren[iCh]->InitChildren();
+
         }
 
         return 1;
@@ -134,7 +141,7 @@ namespace WMH {
         }
         else{
             cout << mContent.MapPtN << " points are found:" << endl;
-            for (int pi=0;pi < mContent.MapPtN;pi++){
+            for (int pi = 0;pi < mContent.MapPtN;pi++){
                 cout << "No." << pi << ": ";
                 cout << "x=" << mContent.MapPts[pi]->x << ", ";
                 cout << "z=" << mContent.MapPts[pi]->z << ";" << endl;
@@ -168,11 +175,11 @@ namespace WMH {
         mMinZ = mCenter.z - mSize / 2;
     }
 
-    void QTNode::setNodeId(int mNodeId) {
-        QTNode::mNodeId = mNodeId;
+    void QTNode::setNodeId(int id) {
+        mNodeId = id;
     }
 
-    int QTNode::getNodeId() const {
+    int QTNode::getNodeId()  {
         return mNodeId;
     }
 
@@ -180,13 +187,27 @@ namespace WMH {
         //TODO  delete content with all points
     }
 
-    void QTNode::PrintChilden(bool isRecursion) {
-        if (isHasChild)
-            cout <<
+    void QTNode::PrintChildren(bool isRecursion) {
+        cout << "Find " << mContent.MapPtN  << " points;"<<endl;
+        if (isHasChild){
+            for(int iCh = 0; iCh < 4; iCh++) {
+                for (int iLv = mDepth; iLv < mTree -> getMMaxDepth(); iLv++)
+                    cout<< "   ";
+                cout << "|-in node "<< oct << mChildren[iCh]->mNodeId << ": ";
+                if (isRecursion){
+                    mChildren[iCh]-> PrintChildren(isRecursion);
+                }
+                else{
+                    cout << mChildren[iCh]->mContent.MapPtN << " points." << endl;
+                }
+
+            }
+        }
     }
 
 
     QuadTree::QuadTree(float size, int MaxDepth, vector<Point3f *> MapPoints) {
+        mMaxDepth = MaxDepth;
 
         Point3f center;
         center.x = 0.0;
@@ -194,11 +215,13 @@ namespace WMH {
         center.z = 0.0;
 
         QTContent* content = FillContentWithMapPoints(MapPoints);
-        RootNode = new QTNode(MaxDepth, size, center, NULL);
-        RootNode->setNodeId(-1);
+        RootNode = new QTNode(mMaxDepth, size, center, NULL, this);
+        RootNode->setNodeId(05);
         RootNode->setContent(content);
         RootNode->InitChildren();
         delete content; //TODO: need to confirm
+
+
     }
 
     QuadTree::~QuadTree() {
@@ -227,7 +250,11 @@ namespace WMH {
 
 
     void QuadTree::PrintTree() {
-        RootNode->PrintChilden(true); // Print children with recursion
+        RootNode->PrintChildren(true); // Print children with recursion
+    }
+
+    int QuadTree::getMMaxDepth() const {
+        return mMaxDepth;
     }
 
 }

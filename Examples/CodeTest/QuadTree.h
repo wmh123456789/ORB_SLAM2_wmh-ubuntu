@@ -47,7 +47,7 @@ typedef struct QTContent{
 class QuadTree;
 class QTNode{
 public:
-    QTNode(int depth, float size, Point3f center, QTNode* parent);
+    QTNode(int depth, float size, Point3f center, QTNode* parent, QuadTree* tree);
 
     virtual ~QTNode();
 
@@ -60,24 +60,24 @@ public:
     void setBoundray();
 
 
-    void setNodeId(int mNodeId);
-    int getNodeId() const;
+    void setNodeId(int NodeId);
+    int  getNodeId();
 
     bool isPointIn(Point3f Pt);
     void QueryNeighborNode(NeighborOrientation Orientation, QTNode* Node);
     int InitChildren();
     void PrintNodeInfo(QTNode* node);
     void PrintNodeContent();
-    void PrintChilden(bool isRecursion);
+    void PrintChildren(bool isRecursion);
 
 
 
 private:
     float mMinX,mMaxX,mMinY,mMaxY,mMinZ,mMaxZ;
-    int mNodeId;  // For each layer DL:00 -> 0x0 DR:01->0x1 UL:10->0x2 UR:11->0x3
+    int mNodeId = 6;  // For each layer DL:00 -> 0x0 DR:01->0x1 UL:10->0x2 UR:11->0x3
     Point3f mCenter;
     float mSize;
-    int mDepth,mMaxDepth;  // RootNode with MaxDepth, depth -1 for child
+    int mDepth;  // RootNode with MaxDepth, depth -1 for child
     const int MAPPOINTS_MAX = 2; // Maximum capacity of map points
     QuadTree* mTree;
     QTNode* mParent;
@@ -102,7 +102,7 @@ private:
 //  | 00 | 01 |             |0:DL|1:DR|
 //  +----+----+  --> x      +----+----+  --> x
 // x+ : right; y+ : down; z+ : front;
-// 00 -> 0x0 01->0x1 10->0x2 11->0x3
+// 00 -> 00 01->01 10->02 11->03   id is oct
 
 class QuadTree {
 public:
@@ -113,6 +113,8 @@ public:
     QuadTree(float size, int MaxDepth,vector<Point3f*> MapPoints);
 
     virtual ~QuadTree();
+
+    int getMMaxDepth() const;
 
     QTNode* QueryNodeById(int NodeId);
     QTNode* QueryPt();
@@ -125,6 +127,7 @@ public:
 private:
     QTNode* RootNode;
     string mpWord;
+    int mMaxDepth;
 
 }; // class QuadTree
 

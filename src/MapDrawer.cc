@@ -46,6 +46,7 @@ MapDrawer::MapDrawer(Map* pMap, const string &strSettingPath):mpMap(pMap)
 // Draw the base plane by a grid
 void MapDrawer::DrawBaseGrid()
 {
+    bool isDrawBasePlane = false;
     float GridStep = 0.1;    // the size of each cell in grid
     float GridSize = 3.0;    // the radius of the whole grid
     int   GridLineNum;  // half-lines number in one direction
@@ -92,14 +93,15 @@ void MapDrawer::DrawBaseGrid()
     glEnd();
 
     // Draw a plane by a rectangle
-    glBegin(GL_POLYGON);
-    glColor3f(0.9f,0.5f,0.5f);
-    glVertex3f(GridSize, 0.0f,     0.0f);
-    glVertex3f(GridSize, 0.0f, GridSize);
-    glVertex3f(    0.0f, 0.0f, GridSize);
-    glVertex3f(    0.0f, 0.0f,     0.0f);
-    glEnd();
-
+    if(isDrawBasePlane) {
+        glBegin(GL_POLYGON);
+        glColor3f(0.9f, 0.5f, 0.5f);
+        glVertex3f(GridSize, 0.0f, 0.0f);
+        glVertex3f(GridSize, 0.0f, GridSize);
+        glVertex3f(0.0f, 0.0f, GridSize);
+        glVertex3f(0.0f, 0.0f, 0.0f);
+        glEnd();
+    }
     return;
 }
 

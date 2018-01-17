@@ -36,9 +36,10 @@ double LoadTimestamp(const string &strFile);
 
 int main(int argc, char **argv)
 {
-    if(argc != 4)
+    if (!(argc== 4 || argc == 6))
     {
-        cerr << endl << "Usage: ./mono_wmh path_to_vocabulary path_to_settings path_to_sequence" << endl;
+        cerr << endl << "Usage 1: ./mono_wmh path_to_vocabulary path_to_settings path_to_sequence" << endl;
+        cerr << endl << "Usage 2: ./mono_wmh path_to_vocabulary path_to_settings path_to_sequence From_N To_N" << endl;
         return 1;
     }
 
@@ -73,6 +74,12 @@ int main(int argc, char **argv)
 
     // for(int ni=0; ni<nImages; ni++)
     int ni = 1;
+    int GoToFrom = nImages+2, GoToTerm = nImages+2;
+    if(argc == 6){
+        GoToFrom = atoi(argv[4]);
+        GoToTerm = atoi(argv[5]);
+    }
+
  
     while(ni>0 && ni < nImages+1)
     {
@@ -151,6 +158,10 @@ int main(int argc, char **argv)
         SLAM.SaveCurrentFrameInfo(string(argv[3])+"/CurFrmInfo.csv");
         SLAM.SaveMapPointInfo("./MapInfo/MPInfo_"+ni_s+".csv");
         ni++;
+
+        // Loop over seq
+        if(ni == GoToFrom)
+            ni = GoToTerm;
     }
 
     // Wait keyboard input before end.   by wmh

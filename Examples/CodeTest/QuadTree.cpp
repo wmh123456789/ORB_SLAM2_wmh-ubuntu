@@ -242,7 +242,8 @@ namespace WMH {
             else
                 mChildren[iCh]->setNodeId(iCh + mNodeId*8);
             // Init the Children in next level.
-            mChildren[iCh]->InitChildren();
+            if (mChildren[iCh]-> mDepth > 0)
+                mChildren[iCh]->InitChildren();
 
         }
 
@@ -336,7 +337,7 @@ namespace WMH {
 
 
     void QTNode::PrintChildren(bool isRecursion) {
-        cout << "Find " << mContent.MapPtN  << " points;"<<endl;
+        cout << "Find " << dec << mContent.MapPtN  << " points;"<<endl;
         if (isHasChild){
             for(int iCh = 0; iCh < 4; iCh++) {
                 for (int iLv = mDepth; iLv < mTree -> getMaxDepth(); iLv++)
@@ -346,7 +347,7 @@ namespace WMH {
                     mChildren[iCh]-> PrintChildren(isRecursion);
                 }
                 else{
-                    cout << mChildren[iCh]->mContent.MapPtN << " points." << endl;
+                    cout << dec << mChildren[iCh]->mContent.MapPtN << " points." << endl;
                 }
 
             }

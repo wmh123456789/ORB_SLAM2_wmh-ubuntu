@@ -102,7 +102,8 @@ int main(int argc, char **argv)
             }
         }
 
-        
+        cv::imshow("Car",im);
+
         cout << "Image: "<< ni_s << ".jpg/png is loaded.  " << endl;
         // double tframe = vTimestamps[ni];
         double tframe = LoadTimestamp(string(argv[3])+"/"+ ni_s + ".txt");

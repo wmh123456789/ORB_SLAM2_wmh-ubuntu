@@ -2,9 +2,63 @@
 #include "QuadTree.h"
 #include <string>
 #include "FaceDetection.h"
+#include <pangolin/pangolin.h>
 
 using namespace std;
 using namespace WMH;
+
+
+vector<WMH::Point3f*> LoadCSV(const string &strFile){
+    ifstream f;
+    stringstream ss;
+    int mnId,RefKFId,RefKFFrmId,NextId,FirstKF,FirstFrm;
+    float PosX,PosY,PosZ;
+    vector<WMH::Point3f*> MapPoints;
+    f.open(strFile.c_str());
+
+    // Skip first Line
+    string s0;
+    getline(f,s0);
+    while(!f.eof())
+    {
+        string s,word;
+        getline(f,s);
+        //mnId,	RefKF.Id, RefKF.FrameId, NextId, FirstKF, FirstFrame, PoseX, PoseY, PoseZ
+        if(!s.empty()) {
+            stringstream ss(s);
+            getline(ss,word,',');
+            mnId = atoi(word.c_str());
+            getline(ss,word,',');
+            RefKFId = atoi(word.c_str());
+            getline(ss,word,',');
+            RefKFFrmId = atoi(word.c_str());
+            getline(ss,word,',');
+            NextId = atoi(word.c_str());
+            getline(ss,word,',');
+            FirstKF = atoi(word.c_str());
+            getline(ss,word,',');
+            FirstFrm = atoi(word.c_str());
+
+            getline(ss,word,',');
+            PosX = float(atof(word.c_str()));
+            getline(ss,word,',');
+            PosY = float(atof(word.c_str()));
+            getline(ss,word,',');
+            PosZ= float(atof(word.c_str()));
+
+            Point3f *pt = new Point3f;
+            pt->x = PosX;
+            pt->y = 0.0;  // 0.0 in defalt
+            pt->z = PosZ;
+
+            MapPoints.insert(MapPoints.begin(), pt);
+        }
+    }
+
+
+    return MapPoints;
+}
+
 
 int main() {
     int i=0;
@@ -21,7 +75,7 @@ int main() {
 //    WMH::QuadTree QT;
 //    QT.SayHello("You are handsome boy");
 
-    vector<WMH::Point3f*> Points;
+    vector<WMH::Point3f*> Points, MapPoints;
 
 //    float xz[10][2] = {{1.0,1.0},       // UR
 //                       {2.0,2.0},       // UR
@@ -52,8 +106,12 @@ int main() {
         pt->z = xz[i][1];
         Points.insert(Points.end(),pt);
     }
+//    WMH::QuadTree QT2 = QuadTree(32.0,6,Points);
 
-    WMH::QuadTree QT2 = QuadTree(32.0,6,Points);
+    string CSVFilePath = "/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Monocular/MapInfo/MPInfo_49.csv";
+    MapPoints = LoadCSV(CSVFilePath);
+    WMH::QuadTree QT2 = QuadTree(3.2,6,MapPoints);
+
 
 //    QT2.PrintRootNode();
     QT2.PrintTree();
@@ -68,9 +126,10 @@ int main() {
 
     cout << "Calc neighbor ID:" << IDCalculater(013,nRIGHT)<<endl;
 
-    FaceDetection face;
+//    FaceDetection face;
 //    face.Detect();
-    face.DetectCam();
-    return 0;
-};
+//    face.DetectCam();
 
+
+    return 0;
+}

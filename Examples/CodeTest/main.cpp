@@ -1,6 +1,7 @@
 #include <iostream>
 #include "QuadTree.h"
 #include <string>
+#include "FaceDetection.h"
 
 using namespace std;
 using namespace WMH;
@@ -20,7 +21,7 @@ int main() {
 //    WMH::QuadTree QT;
 //    QT.SayHello("You are handsome boy");
 
-    vector<Point3f*> Points;
+    vector<WMH::Point3f*> Points;
 
 //    float xz[10][2] = {{1.0,1.0},       // UR
 //                       {2.0,2.0},       // UR
@@ -45,7 +46,7 @@ int main() {
                        {5.1,2.3} };    // DR
 
     for( i = 0; i<11; i++){
-        Point3f* pt = new Point3f;
+        WMH::Point3f* pt = new Point3f;
         pt->x = xz[i][0];
         pt->y = 0.0;
         pt->z = xz[i][1];
@@ -67,6 +68,9 @@ int main() {
 
     cout << "Calc neighbor ID:" << IDCalculater(013,nRIGHT)<<endl;
 
+    FaceDetection face;
+//    face.Detect();
+    face.DetectCam();
     return 0;
 };
 

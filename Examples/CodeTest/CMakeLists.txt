@@ -1,6 +1,12 @@
-cmake_minimum_required(VERSION 3.9)
+cmake_minimum_required(VERSION 2.8)
 project(CodeTest)
 
 set(CMAKE_CXX_STANDARD 11)
+find_package(OpenCV 3.0 QUIET NO_DEFAULT_PATH PATHS "/usr/local/")
 
-add_executable(CodeTest main.cpp QuadTree.cpp QuadTree.h)
+
+
+add_executable(CodeTest main.cpp QuadTree.cpp QuadTree.h FaceDetection.cpp FaceDetection.h)
+
+target_link_libraries(CodeTest
+        ${OpenCV_LIBS})

@@ -23,6 +23,8 @@
 #include "KeyFrame.h"
 #include <pangolin/pangolin.h>
 #include <mutex>
+#include "QuadTree.h"
+
 
 namespace ORB_SLAM2
 {
@@ -110,7 +112,10 @@ void MapDrawer::DrawMapPoints()
     const vector<MapPoint*> &vpMPs = mpMap->GetAllMapPoints();
     const vector<MapPoint*> &vpRefMPs = mpMap->GetReferenceMapPoints();
 
+
     set<MapPoint*> spRefMPs(vpRefMPs.begin(), vpRefMPs.end());
+    WMH::QuadTree* QT;
+    vector<WMH::Point3f*> QTPoints;
 
     if(vpMPs.empty())
         return;
@@ -152,8 +157,6 @@ void MapDrawer::DrawMapPoints()
             continue;
         cv::Mat pos = (*sit)->GetWorldPos();
 
-
-
         //  Hide the points under the base plane    by wmh
         // Distance to base plane: cos(theta)*y - sin(theta)*z
         if (cos(mHeadAngle)*pos.at<float>(1) - sin(mHeadAngle)*pos.at<float>(2) > 0.05)
@@ -180,6 +183,10 @@ void MapDrawer::DrawMapPointsProj()
     const vector<MapPoint*> &vpRefMPs = mpMap->GetReferenceMapPoints();
 
     set<MapPoint*> spRefMPs(vpRefMPs.begin(), vpRefMPs.end());
+
+//    WMH::QuadTree* QT;
+    vector<WMH::Point3f*> QTPoints;
+    WMH::Point3f* pt;
 
     if(vpMPs.empty())
         return;
@@ -212,7 +219,17 @@ void MapDrawer::DrawMapPointsProj()
 
         glVertex3f(proj.at<float>(0), proj.at<float>(1), proj.at<float>(2));
 
+        // Convert the point format
+        pt = new(WMH::Point3f);
+        pt->x = proj.at<float>(0);
+        pt->y = proj.at<float>(1);
+        pt->z = proj.at<float>(2);
+        QTPoints.push_back(pt);
     }
+
+    WMH::QuadTree QT = WMH::QuadTree(3.2,6,QTPoints);
+
+
     glEnd();
 
 

@@ -87,7 +87,7 @@ private:
     Point3f mCenter;
     float mSize;
     int mDepth;  // RootNode with MaxDepth, depth -1 for child
-    const int MAPPOINTS_MAX = 2; // Maximum capacity of map points
+    const int MAPPOINTS_MAX = 5; // Maximum capacity of map points
     QuadTree* mTree;
     QTNode* mParent;
 //    QTNode  mChildren[4]; // 00 -> 0x0 01->0x1 10->0x2 11->0x3

@@ -337,7 +337,10 @@ namespace WMH {
 
 
     void QTNode::PrintChildren(bool isRecursion) {
-        cout << "Find " << dec << mContent.MapPtN  << " points;"<<endl;
+        if (mContent.MapPtN > MAPPOINTS_MAX)
+            cout << "Find " << dec << mContent.MapPtN  << " points;"<<endl;
+        else
+            cout<<endl;
         if (isHasChild){
             for(int iCh = 0; iCh < 4; iCh++) {
                 for (int iLv = mDepth; iLv < mTree -> getMaxDepth(); iLv++)

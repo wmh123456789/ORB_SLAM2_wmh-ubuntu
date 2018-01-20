@@ -79,15 +79,19 @@ int main(int argc, char **argv)
         GoToFrom = atoi(argv[4]);
         GoToTerm = atoi(argv[5]);
     }
-
+    // Fake time stamp:
+    double t0 = 1512724685.0989;
+    unsigned long ti = 0;
  
-    while(ni>0 && ni < nImages+1)
+//    while(ni>0 && ni < nImages+1)
+    bool isInverseLoop = false;
+    while(abs(ni) < nImages+1)
     {
         // Read image from file
         // im = cv::imread(string(argv[3])+"/"+vstrImageFilenames[ni],CV_LOAD_IMAGE_UNCHANGED);
         stringstream ni_ss;  // TODO need to optimize
         string ni_s;
-        ni_ss << ni;
+        ni_ss << abs(ni);
         ni_ss >> ni_s;
         im = cv::imread(string(argv[3])+"/"+ni_s+".jpg",CV_LOAD_IMAGE_UNCHANGED); // Read image from file buffer.  By wmh
         if(im.empty())
@@ -102,13 +106,13 @@ int main(int argc, char **argv)
             }
         }
 
-        cv::imshow("Car",im);
-
         cout << "Image: "<< ni_s << ".jpg/png is loaded.  " << endl;
         // double tframe = vTimestamps[ni];
         double tframe = LoadTimestamp(string(argv[3])+"/"+ ni_s + ".txt");
         // cout << "@Timestamp: " << tframe << endl;
-   
+
+        // use faked time stamp for debug
+        tframe = t0+ti*0.2;
         vTimestamps.push_back(tframe);
        
 
@@ -130,9 +134,6 @@ int main(int argc, char **argv)
 //                << Tcw.at<float>(2) << endl;
 //        }
 
-
-
-
 #ifdef COMPILEDWITHC11
         std::chrono::steady_clock::time_point t2 = std::chrono::steady_clock::now();
 #else
@@ -150,19 +151,34 @@ int main(int argc, char **argv)
         // else if(ni>0)
         //     T = tframe-vTimestamps[ni-1];
 
-        double T = 0.1;  // T set to 0.1 (10Hz)when debug, 0.2 (5Hz)when Cozmo realtime test, 0 when full speed
+        double T = 0.001;  // T set to 0.1 (10Hz)when debug, 0.2 (5Hz)when Cozmo realtime test, 0 when full speed
         if(ttrack<T)
             usleep((T-ttrack)*1e6);
 
         // Save save results for coodinate study.  by wmh
         // SLAM.SaveKeyFrameInfo("./MapInfo/KFInfo_"+ni_s+".csv");
-        SLAM.SaveCurrentFrameInfo(string(argv[3])+"/CurFrmInfo.csv");
-        SLAM.SaveMapPointInfo("./MapInfo/MPInfo_"+ni_s+".csv");
+//        SLAM.SaveCurrentFrameInfo(string(argv[3])+"/CurFrmInfo.csv");
+//        SLAM.SaveMapPointInfo("./MapInfo/MPInfo_"+ni_s+".csv");
         ni++;
+        ti++;
+        // To speed up SLAM "Training", sequence loop is introduced.
+        // Loop over seq (End >= From > Term >= 0)
+        // No Loop: 1 > 2 > 3 >...> End-1 > End
+        // From-Term Loop: 1 > ...From -1 > From > Term > Term+1 > ... > From > ...
+        // InverseLoop enabled:  1 > ...> From > -From > ... > -Term > Term > ... > From > ...
 
-        // Loop over seq
-        if(ni == GoToFrom)
-            ni = GoToTerm;
+
+        if (isInverseLoop){
+            if (ni == GoToFrom)
+                ni = -GoToFrom;
+            if (ni == -GoToTerm)
+                ni = GoToTerm;
+        }
+        else{
+            // Loop over seq
+            if(ni == GoToFrom)
+                ni = GoToTerm;
+        }
     }
 
     // Wait keyboard input before end.   by wmh

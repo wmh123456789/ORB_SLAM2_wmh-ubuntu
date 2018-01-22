@@ -34,8 +34,10 @@ using namespace std;
 namespace ORB_SLAM2
 {
 
-const int ORBmatcher::TH_HIGH = 100;
-const int ORBmatcher::TH_LOW = 50;
+//const int ORBmatcher::TH_HIGH = 100; // Origin
+const int ORBmatcher::TH_HIGH = 100; // by wmh
+//const int ORBmatcher::TH_LOW = 50; // Origin
+const int ORBmatcher::TH_LOW = 60; // by wmh
 const int ORBmatcher::HISTO_LENGTH = 30;
 
 ORBmatcher::ORBmatcher(float nnratio, bool checkOri): mfNNratio(nnratio), mbCheckOrientation(checkOri)
@@ -345,13 +347,16 @@ int ORBmatcher::SearchByProjection(KeyFrame* pKF, cv::Mat Scw, const vector<MapP
         cv::Mat PO = p3Dw-Ow;
         const float dist = cv::norm(PO);
 
+//        cout << minDistance << " : " << dist << " : " << maxDistance << endl; // For debug  by wmh
+
         if(dist<minDistance || dist>maxDistance)
             continue;
 
         // Viewing angle must be less than 60 deg
         cv::Mat Pn = pMP->GetNormal();
-
-        if(PO.dot(Pn)<0.5*dist)
+        // try to loose this threshold  by wmh
+        if(PO.dot(Pn)<0.0*dist) // cos80=0.174  70=0.342; 65=0.423;
+//        if(PO.dot(Pn)<0.5*dist) // Origin
             continue;
 
         int nPredictedLevel = pMP->PredictScale(dist,pKF);
@@ -881,7 +886,9 @@ int ORBmatcher::Fuse(KeyFrame *pKF, const vector<MapPoint *> &vpMapPoints, const
         // Viewing angle must be less than 60 deg
         cv::Mat Pn = pMP->GetNormal();
 
-        if(PO.dot(Pn)<0.5*dist3D)
+        // Loose the threshold to improve tracking !!!!  by wmh
+        if(PO.dot(Pn)<0.174*dist3D)  // cos80=0.174  70=0.342; 65=0.423;
+//        if(PO.dot(Pn)<0.5*dist3D)    // origin
             continue;
 
         int nPredictedLevel = pMP->PredictScale(dist3D,pKF);

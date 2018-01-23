@@ -74,14 +74,35 @@ int main(int argc, char **argv)
 
     // for(int ni=0; ni<nImages; ni++)
     int ni = 1;
+
+    // Jump-back-and-loop strategy to avoid tracking lost
+    int LostCount = 0;
+    int TrackStartN = 0;
+    int MAXLOST_N  = 10;
+    int JUMPBACK_N = 50;
+    bool isJumpBack = true;
+
+
+    // partially-looping function
     int GoToFrom = nImages+2, GoToTerm = nImages+2;
+
     if(argc == 6){
         GoToFrom = atoi(argv[4]);
         GoToTerm = atoi(argv[5]);
+    } else{
+
     }
+
+
     // Fake time stamp:
     double t0 = 1512724685.0989;
     unsigned long ti = 0;
+
+#ifdef COMPILEDWITHC11
+    std::chrono::steady_clock::time_point ta = std::chrono::steady_clock::now();
+#else
+    std::chrono::monotonic_clock::time_point ta = std::chrono::monotonic_clock::now();
+#endif
  
 //    while(ni>0 && ni < nImages+1)
     bool isInverseLoop = false;
@@ -125,7 +146,7 @@ int main(int argc, char **argv)
         // Pass the image to the SLAM system
         cv::Mat Tcw = SLAM.TrackMonocular(im,tframe);
 
-//        // output the Tcw of current frame   by wmh
+        // output the Tcw of current frame   by wmh
 //        if (Tcw.rows > 0)
 //        {
 //            cout<< "Tcw:"
@@ -161,12 +182,14 @@ int main(int argc, char **argv)
 //        SLAM.SaveMapPointInfo("./MapInfo/MPInfo_"+ni_s+".csv");
         ni++;
         ti++;
+
+
         // To speed up SLAM "Training", sequence loop is introduced.
+
         // Loop over seq (End >= From > Term >= 0)
         // No Loop: 1 > 2 > 3 >...> End-1 > End
         // From-Term Loop: 1 > ...From -1 > From > Term > Term+1 > ... > From > ...
         // InverseLoop enabled:  1 > ...> From > -From > ... > -Term > Term > ... > From > ...
-
 
         if (isInverseLoop){
             if (ni == GoToFrom)
@@ -179,7 +202,40 @@ int main(int argc, char **argv)
             if(ni == GoToFrom)
                 ni = GoToTerm;
         }
+
+
+        // Jump-back-and-loop strategy to avoid tracking lost
+        cout << "Tracking State: " <<SLAM.GetTrackingState();
+//        if (Tcw.rows == 0)
+//            cout << " : Tracking lost~~~~~~~~~~~~~~~~~~~~~" << endl;
+        if (isJumpBack) {
+            switch (SLAM.GetTrackingState()) {
+                case 1: // Not initialize yet
+                    break;
+                case 2:  // Tracking
+                    LostCount = 0;
+                    if (TrackStartN == 0)
+                        TrackStartN = ni;
+                case 3: // Tracking lost
+                    LostCount++;
+                    break;
+                default:
+                    break;
+            }
+            if (LostCount == MAXLOST_N) {
+                ni = max(ni - JUMPBACK_N, TrackStartN);
+                cout << "~~~~~~~~~~~~~~~~~~~~~~~  Jump back to: " << ni << endl;
+                LostCount = 0;
+            }
+        }
+
     }
+
+#ifdef COMPILEDWITHC11
+    std::chrono::steady_clock::time_point tb = std::chrono::steady_clock::now();
+#else
+    std::chrono::monotonic_clock::time_point tb = std::chrono::monotonic_clock::now();
+#endif
 
     // Wait keyboard input before end.   by wmh
     // TODO: timer should be paused here
@@ -203,6 +259,10 @@ int main(int argc, char **argv)
 
     // Save camera trajectory
     SLAM.SaveKeyFrameTrajectoryTUM("KeyFrameTrajectory.txt");
+
+    cout << "Total time to finish:";
+    cout << std::chrono::duration_cast<std::chrono::duration<double> >(tb- ta).count() << endl;
+    cout << "Max tracking-lost:" << MAXLOST_N << "; Jump-Back:" << JUMPBACK_N << endl;
 
     return 0;
 }

@@ -702,6 +702,7 @@ void System::TryKalmanFilter(const string &filename)
     int System::GetTrackingState()
 {
     unique_lock<mutex> lock(mMutexState);
+    // 1: not init yet 2:Tracking 3:lost
     return mTrackingState;
 }
 

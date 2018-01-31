@@ -78,8 +78,8 @@ int main(int argc, char **argv)
     // Jump-back-and-loop strategy to avoid tracking lost
     int LostCount = 0;
     int TrackStartN = 0;
-    int MAXLOST_N  = 10;
-    int JUMPBACK_N = 50;
+    int MAXLOST_N  = 30;
+    int JUMPBACK_N = 70;
     bool isJumpBack = true;
 
 
@@ -172,7 +172,7 @@ int main(int argc, char **argv)
         // else if(ni>0)
         //     T = tframe-vTimestamps[ni-1];
 
-        double T = 0.001;  // T set to 0.1 (10Hz)when debug, 0.2 (5Hz)when Cozmo realtime test, 0 when full speed
+        double T = 0.1;  // T set to 0.1 (10Hz)when debug, 0.2 (5Hz)when Cozmo realtime test, 0 when full speed
         if(ttrack<T)
             usleep((T-ttrack)*1e6);
 
@@ -208,7 +208,7 @@ int main(int argc, char **argv)
         cout << "Tracking State: " <<SLAM.GetTrackingState();
 //        if (Tcw.rows == 0)
 //            cout << " : Tracking lost~~~~~~~~~~~~~~~~~~~~~" << endl;
-        if (isJumpBack) {
+        if (isJumpBack && argc == 4) {
             switch (SLAM.GetTrackingState()) {
                 case 1: // Not initialize yet
                     break;

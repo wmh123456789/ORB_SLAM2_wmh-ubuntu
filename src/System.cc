@@ -269,6 +269,24 @@ cv::Mat System::TrackMonocular(const cv::Mat &im, const double &timestamp)
     mTrackedMapPoints = mpTracker->mCurrentFrame.mvpMapPoints;
     mTrackedKeyPointsUn = mpTracker->mCurrentFrame.mvKeysUn;
 
+    // update QuadTree by map points
+    const vector<MapPoint*> &vpMPs = mpMap->GetAllMapPoints();
+    if (vpMPs.size() > 0) {
+        WMH::QuadTree *QT = new QuadTree(3.2, 7, MapPoint2Point3f(vpMPs));
+        QT->UpdateBlockNodeSet(10);   // set Block with a Passable threshold
+        mpMapDrawer->setQuadTree(QT);
+
+//        // for test
+//        std::set<int> blocks = QT->getBlockedNodeId();
+//        std::set<int>::iterator it;
+//        for (it = blocks.begin(); it != blocks.end(); it++) {
+//            cout << " # " << *it;
+//        }// -- for test
+
+    } else {
+        mpMapDrawer->setQuadTree(nullptr);
+    }
+
     return Tcw;
 }
 
@@ -625,6 +643,24 @@ void System::SaveCurrentFrameInfo(const string &filename)
     f.close();
 }
 
+vector<WMH::Point3f *> System::MapPoint2Point3f(vector<MapPoint *> MPs){
+    vector<WMH::Point3f *> MapPoints;
+    int it;
+    for (it = 0; it < MPs.size();it++) {
+        if(MPs[it]->isBad())
+            continue;
+        WMH::Point3f *point = new WMH::Point3f;
+        cv::Mat pos = MPs[it]->GetWorldPos();
+
+        // TODO: Need calculate the Projction
+        point->x = pos.at<float>(0);
+//        point->y = pos.at<float>(1);
+        point->y = 0.0;
+        point->z = pos.at<float>(2);
+        MapPoints.insert(MapPoints.end(),point);
+    }
+    return MapPoints;
+}
 
 void System::TryKalmanFilter(const string &filename)
 {
@@ -696,9 +732,6 @@ void System::TryKalmanFilter(const string &filename)
 }
 
 
-
-
-
     int System::GetTrackingState()
 {
     unique_lock<mutex> lock(mMutexState);
@@ -717,6 +750,12 @@ vector<cv::KeyPoint> System::GetTrackedKeyPointsUn()
     unique_lock<mutex> lock(mMutexState);
     return mTrackedKeyPointsUn;
 }
+
+
+MapDrawer* System::getMapDrawer() {
+    return mpMapDrawer;
+}
+
 
 } //namespace ORB_SLAM
 

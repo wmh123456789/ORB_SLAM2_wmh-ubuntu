@@ -116,13 +116,13 @@ int main() {
 //    QT2.PrintRootNode();
     QT2.PrintTree();
 
-    int id = 0123456;
-    cout<< id <<endl;
-    vector<int> nums = ID2Vector(id);
-    for(i=0;i<nums.size();i++)
-        cout << nums[i]<< endl;
-
-    cout << "Inverse: " << Vector2ID(nums)<< endl;
+//    int id = 0123456;
+//    cout<< id <<endl;
+//    vector<int> nums = ID2Vector(id);
+//    for(i=0;i<nums.size();i++)
+//        cout << nums[i]<< endl;
+//
+//    cout << "Inverse: " << Vector2ID(nums)<< endl;
 
     cout << "Calc neighbor ID:" << IDCalculater(013,nRIGHT)<<endl;
 
@@ -130,6 +130,25 @@ int main() {
 //    face.Detect();
 //    face.DetectCam();
 
+    cout << "--- Set test ---" << endl;
+    set<int> sss;
+    set<int>::iterator it;
+    sss.insert(1);
+    sss.insert(2);
+    sss.insert(45);
+    sss.insert(2);
+    sss.insert(3);
+
+    cout << dec << sss.size() << endl;
+    if (sss.find(45) == sss.end())
+        cout << "Not Found." << endl;
+    else
+        cout << "Found ~~" << endl;
+
+
+    for (it = sss.begin();  it != sss.end() ; it++) {
+        cout << *it << endl;
+    }
 
     return 0;
 }

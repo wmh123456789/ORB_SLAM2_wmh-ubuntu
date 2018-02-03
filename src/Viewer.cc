@@ -134,7 +134,8 @@ void Viewer::Run()
             mpMapDrawer->DrawMapPoints();
         if(menuShowPointProjection)
             mpMapDrawer->DrawMapPointsProj(); // by wmh
-        mpMapDrawer->DrawBaseGrid(); // By wmh
+        mpMapDrawer->DrawBaseGrid();    // By wmh
+        mpMapDrawer->DrawBlocksInQT();  // Draw QuadTree blocks   by wmh
 
         pangolin::FinishFrame();
 

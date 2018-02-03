@@ -26,7 +26,10 @@
 #include"KeyFrame.h"
 #include<pangolin/pangolin.h>
 
+#include "QuadTree.h"
 #include<mutex>
+
+using namespace WMH;
 
 namespace ORB_SLAM2
 {
@@ -45,6 +48,11 @@ public:
     void SetCurrentCameraPose(const cv::Mat &Tcw);
     void SetReferenceKeyFrame(KeyFrame *pKF);
     void GetCurrentOpenGLCameraMatrix(pangolin::OpenGlMatrix &M);
+
+    QuadTree* mpQT;
+    void setQuadTree(QuadTree* pQT);
+    void DrawBlock(QTNode* node);
+    void DrawBlocksInQT();
 
 private:
 

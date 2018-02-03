@@ -11,6 +11,9 @@
 #include <string>
 #include <unistd.h>
 #include <vector>
+#include <set>
+
+#include "MapPoint.h"
 
 //TODO: change this path when merge the project
 //#include "../../include/MapPoint.h"
@@ -39,6 +42,13 @@ enum NeighborOrientation{
     nLOWER = -2
 };
 
+enum BlockStatus{
+    BLK_UNKOWN = 0,
+    PASSABLE   = 1,
+    BLOCKED    = 2
+};
+
+
 typedef struct QTContent{
     unsigned long MapPtN = 0;
     std::vector<Point3f*> MapPts;  //TODO: Need to initialize.
@@ -66,12 +76,22 @@ public:
 
     void setBoundray();
 
+    float getSize() const;
+
+    QTNode* getChild(int pos);
+
+    const int getMAPPOINTS_MAX() const;
 
     void setNodeId(int NodeId);
     int  getNodeId();
 
+    BlockStatus isPassable();     // 0-unknown  1-Passable, 2-Blocked
+    void setPassable();       // take MAPPOINTS_MAX as threshold
+    void setPassable(int th); // take th as threshold
 
     bool isPointIn(Point3f Pt);
+    bool isHasChild();
+
     QTNode* QueryNodeById(int NodeId);
     QTNode* QueryNeighborNode(NeighborOrientation Orientation);
     int InitChildren();
@@ -79,20 +99,20 @@ public:
     void PrintNodeContent();
     void PrintChildren(bool isRecursion);
 
-
-
 private:
     float mMinX,mMaxX,mMinY,mMaxY,mMinZ,mMaxZ;
     int mNodeId = 06;  // For each layer DL:00 -> 0x0 DR:01->0x1 UL:10->0x2 UR:11->0x3
     Point3f mCenter;
     float mSize;
     int mDepth;  // RootNode with MaxDepth, depth -1 for child
-    const int MAPPOINTS_MAX = 5; // Maximum capacity of map points
+    const int MAPPOINTS_MAX = 7; // Maximum capacity of map points
+    BlockStatus  mPassable = BLK_UNKOWN;   // 0-unknown  1-Passable, 2-Blocked
     QuadTree* mTree;
     QTNode* mParent;
 //    QTNode  mChildren[4]; // 00 -> 0x0 01->0x1 10->0x2 11->0x3
     vector<QTNode*> mChildren;
-    bool isHasChild;
+
+    bool mbHasChild;
     QTContent mContent;
     QTNode* mLeftNb;
     QTNode* mRightNb;
@@ -109,19 +129,18 @@ private:
 //  | 10 | 11 |             |2:UL|3:UR|
 //  +----+----+             +----+----+
 //  | 00 | 01 |             |0:DL|1:DR|
-//  +----+----+  --> x      +----+----+  --> x
+//  +----+----+--> x        +----+----+--> x
 // x+ : right; y+ : down; z+ : front;
 // 00 -> 00 01->01 10->02 11->03   id is oct
-
+class MapPoint;
 class QuadTree {
-public:
-
-
 public:
 //    QuadTree();
     QuadTree(float size, int MaxDepth,vector<Point3f*> MapPoints);
-
     virtual ~QuadTree();
+
+    QTContent* FillContentWithMapPoints(vector<Point3f*> MapPoints);
+    vector<Point3f *> MapPoint2Point3f(vector<MapPoint *> MPs);
 
     int getMaxDepth();
     QTNode* getRootNode();
@@ -130,10 +149,19 @@ public:
     void PrintRootNode();
     void PrintTree();
 
+    void UpdateBlockNodeSet();
+    void UpdateBlockNodeSet(int BlockTh);
+    void UpdateBlockNodeSet(QTNode* node,int BlockTh);
+
+    std::set<int> getBlockedNodeId();
+
+
     void SayHello(const string &someting);
-    QTContent* FillContentWithMapPoints(vector<Point3f*> MapPoints);
+
 
 private:
+    std::set<int> mBlockedNodeId;
+
     QTNode* mRootNode;
     string mpWord;
     int mMaxDepth;

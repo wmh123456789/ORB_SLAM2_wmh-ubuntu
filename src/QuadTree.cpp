@@ -74,7 +74,7 @@ namespace WMH {
         mCenter = center;
         mParent = parent;
         mTree = Tree;
-        isHasChild = false;
+        mbHasChild = false;
         setBoundray();
     }
 
@@ -95,6 +95,10 @@ namespace WMH {
             return true;
         else
             return false;
+    }
+
+    bool QTNode::isHasChild() {
+        return mbHasChild;
     }
 
     QTNode* QTNode::QueryNeighborNode(NeighborOrientation Orientation) {
@@ -183,7 +187,7 @@ namespace WMH {
         mChildren[UR]->setCenter(center);
         mChildren[UR]->setContent(ContUR);
 
-        isHasChild = true;
+        mbHasChild = true;
 
         for(iCh = 0; iCh < 4; iCh++){
             mChildren[iCh]->setBoundray();
@@ -213,8 +217,30 @@ namespace WMH {
         cout << "X: From " << node->mMinX << " to " << mMaxX << endl;
         cout << "Z: From " << node->mMinZ << " to " << mMaxZ << endl;
         cout << "NodeID:" << node->getNodeId() << endl;
+        vector<string> passable = {"Unknown","Passable","Blocked"};
+        cout << "Passable:" << passable[mPassable] << endl;
     }
 
+    BlockStatus QTNode::isPassable(){
+        return mPassable;
+    }
+
+    void QTNode::setPassable() {
+        setPassable(MAPPOINTS_MAX);
+    }
+
+    void QTNode::setPassable(int th) {
+        if (mbHasChild)        // for non-leaf node, set Unknown
+            mPassable = BLK_UNKOWN;
+        else
+            if(mContent.MapPtN > th) // for leaf node, if contains enough MPs, set Blocked
+                mPassable = BLOCKED;
+            else                     // for leaf node, if not contains enough MPs, set Passable
+                mPassable = PASSABLE;
+
+
+
+    }
 
 
     QTNode* QTNode::QueryNodeById(int NodeId) {
@@ -229,7 +255,7 @@ namespace WMH {
         IDs = ID2Vector(NodeId);
 
         for(int i=0; i < IDs.size();i++){
-            if (!ptr->isHasChild){
+            if (!ptr->mbHasChild){
                 cout << "Node" << NodeId << "is not exit."<< endl;
                 return nullptr;
             }
@@ -287,14 +313,24 @@ namespace WMH {
         return mNodeId;
     }
 
+    QTNode* QTNode::getChild(int pos){
+        if (pos < 0 || pos >3){
+            cout << "Error: Only 0-3 can be used as a children index, now get " << pos << endl;
+            return nullptr;
+        }
 
+        if (mbHasChild)
+            return mChildren[pos];
+        else
+            return nullptr;
+    }
 
     void QTNode::PrintChildren(bool isRecursion) {
         if (mContent.MapPtN > MAPPOINTS_MAX)
             cout << "Find " << dec << mContent.MapPtN  << " points;"<<endl;
         else
             cout<<endl;
-        if (isHasChild){
+        if (mbHasChild){
             for(int iCh = 0; iCh < 4; iCh++) {
                 for (int iLv = mDepth; iLv < mTree -> getMaxDepth(); iLv++)
                     cout<< "   ";
@@ -308,6 +344,14 @@ namespace WMH {
 
             }
         }
+    }
+
+    float QTNode::getSize() const {
+        return mSize;
+    }
+
+    const int QTNode::getMAPPOINTS_MAX() const {
+        return MAPPOINTS_MAX;
     }
 
 
@@ -325,8 +369,6 @@ namespace WMH {
         mRootNode->setContent(content);
         mRootNode->InitChildren();
         delete content; //TODO: need to confirm
-
-
     }
 
     QuadTree::~QuadTree() {
@@ -337,6 +379,17 @@ namespace WMH {
     QTNode *QuadTree::getRootNode() {
         return mRootNode;
     }
+
+    std::set<int> QuadTree::getBlockedNodeId(){
+        return std::set<int> (mBlockedNodeId.begin(),mBlockedNodeId.end());
+//        return mBlockedNodeId;
+    }
+
+    int QuadTree::getMaxDepth() {
+        return mMaxDepth;
+    }
+
+
 
     QTContent* QuadTree::FillContentWithMapPoints(vector<Point3f *> MapPoints) {
 
@@ -358,11 +411,6 @@ namespace WMH {
 
     }
 
-    void QuadTree::SayHello(const string &something) {
-        cout << mpWord << something << endl;
-    }
-
-
     void QuadTree::PrintTree() {
         mRootNode->PrintChildren(true); // Print children with recursion
 
@@ -370,8 +418,33 @@ namespace WMH {
 //        cout << "Get node:" << node->getNodeId() << endl;
     }
 
-    int QuadTree::getMaxDepth() {
-        return mMaxDepth;
+    void QuadTree::UpdateBlockNodeSet(){
+        UpdateBlockNodeSet(mRootNode,mRootNode->getMAPPOINTS_MAX());
+    }
+    void QuadTree::UpdateBlockNodeSet(int BlockTh){
+        UpdateBlockNodeSet(mRootNode,BlockTh);
+    }
+    void QuadTree::UpdateBlockNodeSet(QTNode* node, int BlockTh){
+//        node->setPassable();
+        node->setPassable(BlockTh);
+        if (node->isPassable() == BLOCKED){
+            mBlockedNodeId.insert(node->getNodeId());
+            return;
+        }
+
+        if (node->isPassable() == BLK_UNKOWN && node->isHasChild()){
+            for (int i = 0; i<4; i++){
+                UpdateBlockNodeSet(node->getChild(i),BlockTh);
+            }
+        }
+
+        return;
+    }
+
+
+
+    void QuadTree::SayHello(const string &something) {
+        cout << mpWord << something << endl;
     }
 
 }

@@ -25,7 +25,7 @@
 #include <mutex>
 #include "QuadTree.h"
 
-
+using namespace WMH;
 namespace ORB_SLAM2
 {
 
@@ -43,6 +43,14 @@ MapDrawer::MapDrawer(Map* pMap, const string &strSettingPath):mpMap(pMap)
 
 //    mHeadAngle = -25.0 /180*3.14; // the head angle of cozmo
     mHeadAngle = fSettings["Camera.Angle"];  // Edit this in yaml file  by wmh
+}
+
+void MapDrawer::setQuadTree(QuadTree *pQT){
+    // Delete the old QT
+    // TODO: check the delete option works
+//    if (mpQT != nullptr)
+//       delete(*mpQT);
+    mpQT = pQT;
 }
 
 // Draw the base plane by a grid
@@ -104,6 +112,50 @@ void MapDrawer::DrawBaseGrid()
         glVertex3f(0.0f, 0.0f, 0.0f);
         glEnd();
     }
+    return;
+}
+
+
+void MapDrawer::DrawBlocksInQT() {
+    // for debug
+//    int id = 03201;
+//    QTNode* node = mpQT->QueryNodeById(id);
+
+    if (mpQT == nullptr)
+        return;
+//    cout << "Drawing blocks in Quadtree. " << endl;
+
+    QTNode* node;
+    std::set<int> blocks = mpQT->getBlockedNodeId();
+    std::set<int>::iterator it;
+    for (it = blocks.begin(); it != blocks.end(); it++){
+        node = mpQT->QueryNodeById(*it);
+//        cout <<"Node"<< oct << *it << " At: " << node->getCenter().x <<", "<< node->getCenter().z << endl;
+        DrawBlock(node);
+    }
+}
+
+// Draw a block for quadtree
+void MapDrawer::DrawBlock(QTNode* node)
+{
+    //TODO: Only if y=0
+    float centerX = node->getCenter().x;
+    float centerZ = node->getCenter().z;
+    float size = node->getSize();
+
+    float left  = centerX - size/2;
+    float right = centerX + size/2;
+    float upper = centerZ + size/2;
+    float lower = centerZ - size/2;
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.9f, 0.5f, 0.5f);
+    glVertex3f( left, 0.0f, upper);
+    glVertex3f(right, 0.0f, upper);
+    glVertex3f(right, 0.0f, lower);
+    glVertex3f( left, 0.0f, lower);
+    glEnd();
+
     return;
 }
 
@@ -409,7 +461,6 @@ void MapDrawer::DrawCurrentCamera(pangolin::OpenGlMatrix &Twc)
 
     glPopMatrix();
 }
-
 
 void MapDrawer::SetCurrentCameraPose(const cv::Mat &Tcw)
 {

@@ -37,6 +37,8 @@
 #include "ORBVocabulary.h"
 #include "Viewer.h"
 
+#include "QuadTree.h"
+
 // for Kalman filter  by wmh
 #include <opencv2/video/tracking.hpp>
 #include <opencv2/highgui/highgui.hpp>
@@ -138,6 +140,13 @@ public:
     int GetTrackingState();
     std::vector<MapPoint*> GetTrackedMapPoints();
     std::vector<cv::KeyPoint> GetTrackedKeyPointsUn();
+
+
+    // Get Map Drawer   by wmh
+    MapDrawer* getMapDrawer();
+    // for Point format transform  by wmh
+    vector<WMH::Point3f *> MapPoint2Point3f(vector<MapPoint *> MPs);
+
 
 private:
 

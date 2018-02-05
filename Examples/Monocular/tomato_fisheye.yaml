@@ -1,20 +1,20 @@
 %YAML:1.0
 
 #--------------------------------------------------------------------------------------------
-# Camera Parameters. Adjust them!  -- tomato "FOV 60"
+# Camera Parameters. Adjust them!  -- tomato "fish eye"
 #--------------------------------------------------------------------------------------------
 
 # Camera calibration and distortion parameters (OpenCV) 
-Camera.fx: 250.65558228
-Camera.fy: 248.07575248
-Camera.cx: 190.92943279
-Camera.cy: 152.57715639
+Camera.fx: 228.4784399
+Camera.fy: 226.9829570
+Camera.cx: 191.1650090
+Camera.cy: 161.2864066
 
-Camera.k1: -0.0177114
-Camera.k2:  0.0853761
-Camera.p1: -0.0027403
-Camera.p2:  0.0044570
-Camera.k3: -0.1128957
+Camera.k1: -0.38818687
+Camera.k2:  0.20077323
+Camera.p1:  0.00032493
+Camera.p2:  0.00142243
+Camera.k3: -0.05989804
 
 # Camera frames per second 
 Camera.fps: 10.0

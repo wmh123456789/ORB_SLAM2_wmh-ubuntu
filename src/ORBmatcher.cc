@@ -37,7 +37,7 @@ namespace ORB_SLAM2
 //const int ORBmatcher::TH_HIGH = 100; // Origin
 const int ORBmatcher::TH_HIGH = 100; // by wmh
 //const int ORBmatcher::TH_LOW = 50; // Origin
-const int ORBmatcher::TH_LOW = 60; // by wmh
+const int ORBmatcher::TH_LOW = 50; // by wmh
 const int ORBmatcher::HISTO_LENGTH = 30;
 
 ORBmatcher::ORBmatcher(float nnratio, bool checkOri): mfNNratio(nnratio), mbCheckOrientation(checkOri)
@@ -355,7 +355,8 @@ int ORBmatcher::SearchByProjection(KeyFrame* pKF, cv::Mat Scw, const vector<MapP
         // Viewing angle must be less than 60 deg
         cv::Mat Pn = pMP->GetNormal();
         // try to loose this threshold  by wmh
-        if(PO.dot(Pn)<0.0*dist) // cos80=0.174  70=0.342; 65=0.423;
+        // cos80=0.174  70=0.342; 65=0.423; 45=0.707 30=0.866; 20=0.9397
+        if(PO.dot(Pn)<0.9397*dist)
 //        if(PO.dot(Pn)<0.5*dist) // Origin
             continue;
 
@@ -887,7 +888,8 @@ int ORBmatcher::Fuse(KeyFrame *pKF, const vector<MapPoint *> &vpMapPoints, const
         cv::Mat Pn = pMP->GetNormal();
 
         // Loose the threshold to improve tracking !!!!  by wmh
-        if(PO.dot(Pn)<0.174*dist3D)  // cos80=0.174  70=0.342; 65=0.423;
+        // cos80=0.174  70=0.342; 65=0.423; 45=0.707 30=0.866; 20=0.9397
+        if(PO.dot(Pn)<0.9397*dist3D)
 //        if(PO.dot(Pn)<0.5*dist3D)    // origin
             continue;
 
@@ -1044,9 +1046,13 @@ int ORBmatcher::Fuse(KeyFrame *pKF, cv::Mat Scw, const vector<MapPoint *> &vpPoi
             continue;
 
         // Viewing angle must be less than 60 deg
+
         cv::Mat Pn = pMP->GetNormal();
 
-        if(PO.dot(Pn)<0.5*dist3D)
+        // Loose the threshold to improve tracking !!!!  by wmh
+        // cos80=0.174  70=0.342; 65=0.423; 45=0.707 30=0.866; 20=0.9397
+        if(PO.dot(Pn)<0.9397*dist3D)
+//        if(PO.dot(Pn)<0.5*dist3D)
             continue;
 
         // Compute predicted scale level

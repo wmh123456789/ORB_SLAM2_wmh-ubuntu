@@ -115,7 +115,7 @@ bool Initializer::Initialize(const Frame &CurrentFrame, const vector<int> &vMatc
 
     // Try to reconstruct from homography or fundamental depending on the ratio (0.40-0.45)
 //    if(RH>0.40)   // Original threshold
-      if(RH>0.50)  // By wmh, For cozmo-QVGA
+      if(RH>0.45)  // By wmh, For cozmo-QVGA
     {
         cout << "Homography wins at RH =" << RH << endl;
         return ReconstructH(vbMatchesInliersH,H,mK,R21,t21,vP3D,vbTriangulated,1.0,50);

@@ -781,8 +781,8 @@ bool Tracking::TrackReferenceKeyFrame()
     // If enough matches are found we setup a PnP solver
     // By wmh: try to loose some threshold to make the tracking eazier.
 
-//    ORBmatcher matcher(0.7,true);    // Original
-    ORBmatcher matcher(0.8,true);       // by wmh
+    ORBmatcher matcher(0.7,true);    // Original
+//    ORBmatcher matcher(0.8,true);       // by wmh
 
     vector<MapPoint*> vpMapPointMatches;
 
@@ -1205,10 +1205,11 @@ void Tracking::SearchLocalPoints()
 
     if(nToMatch>0)
     {
-//        ORBmatcher matcher(0.8);  // Origin
+        ORBmatcher matcher(0.8);  // Origin
 //        int th = 1;   // Origin
-        ORBmatcher matcher(0.9);  // by wmh
-        int th = 5;     // by wmh
+//        ORBmatcher matcher(0.9);  // by wmh
+//        int th = 5;     // by wmh
+        int th = 1;    // Origin
         if(mSensor==System::RGBD)
             th=3;
         // If the camera has been relocalised recently, perform a coarser search
@@ -1383,8 +1384,8 @@ bool Tracking::Relocalization()
 
     // We perform first an ORB matching with each candidate
     // If enough matches are found we setup a PnP solver
-//    ORBmatcher matcher(0.75,true);  // Origin
-    ORBmatcher matcher(0.85,true);  // by wmh
+    ORBmatcher matcher(0.75,true);  // Origin
+//    ORBmatcher matcher(0.85,true);  // by wmh
 
     vector<PnPsolver*> vpPnPsolvers;
     vpPnPsolvers.resize(nKFs);
